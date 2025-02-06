@@ -1,0 +1,156 @@
+#control {
+       position: absolute;
+       padding: 5px;
+       background: var(--bgtrans);
+       display: flex;
+       flex-direction: row;
+       align-items: center;
+       justify-content: center;
+       bottom: 20px;
+       border-radius: 50vmax;
+       gap: 10px;
+       opacity: 0.5;
+       translate: 0% 20%;
+       scale: 0.8;
+       transition: 0.3s ease 1s;
+       
+       &:hover {
+              opacity: 1;
+              translate: 0;
+              scale: 1;
+              transition: 0.3s ease;
+       }
+
+       .button-wrapper {
+              background: transparent;
+              border-radius: 50vmax;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: center;
+              gap: 5px;
+
+              .control-button {
+                     aspect-ratio: 1;
+                     width: 40px;
+                     background: transparent;
+                     border-radius: 50vmax;
+                     cursor: pointer;
+                     display: flex;
+                     justify-content: center;
+                     align-items: center;
+                     transition: 0.3s ease;
+
+                     &:hover {
+                            background: var(--bg);
+
+                            span {
+                                   opacity: 1;
+                                   color: var(--pri);
+                            }
+                     }
+
+                     span {
+                            opacity: 0.5;
+                            transition: 0.3s ease;
+                     }
+              }
+       }
+}
+
+#control-settings {
+       position: absolute;
+       padding: 10px;
+       width: 400px;
+       height: 200px;
+       background: var(--bgtrans);
+       display: flex;
+       flex-direction: row;
+       align-items: center;
+       justify-content: center;
+       bottom: 80px;
+       border-radius: 10px;
+       gap: 10px;
+       transition: 0.2s ease 0s;
+       display: flex;
+       flex-direction: column;
+       justify-content: flex-start;
+       align-items: flex-start;
+       overflow-y: scroll;
+       scale: 0.9;
+       opacity: 0;
+       translate: 0% 10px;
+
+       &.active {
+              scale: 1;
+              opacity: 1;
+              translate: 0px 0px;
+       }
+
+       .control-wrapper, .control-wrapper-h {
+              background: var(--bg);
+              padding: 10px;
+              border-radius: 10px;
+              display: flex;
+              width: 100%;
+              gap: 5px;
+
+              .toggle {
+                     position: relative;
+                     height: 100%;
+                     aspect-ratio: 2/1;
+                     background: var(--bg2);
+                     transition: 0.3s ease;
+                     border-radius: 50px;
+
+                     &.active {
+                            background: var(--pri);
+
+                            &:before {
+                                   background: black;
+                                   right: 5px;
+                                   left: inherit;
+                            }
+                     }
+
+                     &:before {
+                            position: absolute;
+                            content: '';
+                            background: white;
+                            height: 70%;
+                            aspect-ratio: 1;
+                            border-radius: 50%;
+                            top: 50%;
+                            translate: 0% -50%;
+                            left: 5px;
+                     }
+              }
+       } 
+       .control-wrapper-h {
+              flex-direction: row;
+              justify-content: space-between;
+       }  
+       .control-wrapper {
+              flex-direction: column;
+       }       
+}
+#control-debug {
+       position: absolute;
+       bottom: 5px;
+       left: 5px;
+       display: flex;
+       flex-direction: column;
+
+       h2 {
+              font-size: 12px;
+              color: var(--pri);
+
+              span {
+                     color: var(--txt);
+              }
+       }
+}
+
+#control-debug, #control-settings, #control {
+       z-index: 99999;
+}

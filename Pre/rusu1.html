@@ -1,0 +1,548 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- HTML Meta Tags -->
+    <title>Polargram</title>
+    <meta content="#ec2727" data-react-helmet="true" name="theme-color">
+    <meta name="description" content="A place for artists, developers and gamers to mark their presence and sell their work">
+    <meta property="og:description" content="A place for artists, developers and gamers to mark their presence and sell their work">
+    <meta name="twitter:description" content="A place for artists, developers and gamers to mark their presence and sell their work">
+
+    <meta property="og:title" content="Polargram">
+    <meta name="twitter:title" content="Polargram">
+    <meta property="og:url" content="https://polargram.pages.dev">
+    <meta property="twitter:url" content="https://polargram.pages.dev">
+    <meta property="og:image" content="https://polargram.pages.dev/og-banner.png">
+    <meta name="twitter:image" content="https://polargram.pages.dev/og-banner.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:type" content="website">
+    <meta property="twitter:domain" content="polargram.pages.dev">
+
+
+    <link rel="icon" href="og-image.png" type="image/x.icon">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script type="module" src="https://polargram.pages.dev/API/import.js" defer></script>
+    <link rel="stylesheet" href="https://polargram.pages.dev/API/import.css">
+</head>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+<link rel="stylesheet" href="SRC/inject.css">
+<script type="module" src="SRC/inject.js"></script>
+<html lang="en">
+
+<body>
+    <div id="control" class="trans border">
+        <div class="button-wrapper">
+            <div id="control-settings-button" class="control-button">
+                <span class="material-symbols-rounded">settings</span>
+            </div>
+        </div>
+        <div class="button-wrapper">
+            <div id="control-l" class="control-button">
+                <span class="material-symbols-rounded">chevron_left</span>
+            </div>
+            <div id="control-r" class="control-button">
+                <span class="material-symbols-rounded">chevron_right</span>
+            </div>
+        </div>
+        <div class="button-wrapper">
+            <div class="control-button">
+                <span class="material-symbols-rounded">fullscreen</span>
+            </div>
+        </div>
+    </div>
+    <div id="control-settings" class="trans border">
+        <div class="control-wrapper">
+            <h3>Big text size</h3>
+            <input title="big text" placeholder="" type="range" step="1" value="2" min="1" max="3">
+        </div>
+        <div class="control-wrapper">
+            <h3>Description size</h3>
+            <input placeholder="small text" type="range" step="1" value="2" min="1" max="3">
+        </div>
+        <div class="control-wrapper-h">
+            <h3>Debug</h3>
+            <div class="toggle"></div>
+        </div>
+    </div>
+    <div id="control-debug">
+        <h2>Debug <span>On</span></h2>
+        <h2>Slide <span id="slidenumber">NULL</span></h2>
+        <h2>Hardware optimisation <span>On</span></h2>
+        <h2>Ticks <span id="tick-random">~50</span></h2>
+        <h2>Backend ping <span id="backendping">On</span></h2>
+    </div>
+
+
+    <!-- all the cool stuff here -->
+    <div id="slide0" class="slide">
+        <div class="title">
+            <h1>Кто такой настоящий друг?</h1>
+            <h2>сделал Миндаугас и Данила</h2>
+        </div>
+        <div class="decor">
+            <img alt="hi" src="IMAGES/pngtree-full-length-portrait-of-people-pose-photo-png-image_14414598-3502357076.png">
+        </div>
+    </div>
+
+    <div id="slide1" class="slide">
+        <div class="decor">
+
+        </div>
+
+        <div class="text">
+            <h1>настоящий друг это человек который...</h1>
+            <div class="sep"></div>
+            <h2>всегда рядом когда что то случается;</h2>
+            <h2>выслушивает тебя;</h2>
+            <h2>не нужно ничего скрывать;</h2>
+            <h2>и с ним действительно интересно поговорить;</h2>
+        </div>
+           
+        <div class="decor1"></div>
+        <img class="slide1-img1" alt="help" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F5%2FHelping-Hands-PNG-Images.png&f=1&nofb=1&ipt=75d630d557d56826cf8256d22a0e2f6bdd90375e12bfef4ac064b59b83ee6e86&ipo=images">
+        <img class="slide1-img2" alt="help" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpluspng.com%2Fimg-png%2Ffree-png-listening-ear-png-ear-clipart-644.png&f=1&nofb=1&ipt=9f78ed8a517cf853c1da15b67de06f5f1bb94a9b9d3c713eb2063849d514c7f0&ipo=images">
+        <img class="slide1-img3" alt="help" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpluspng.com%2Fimg-png%2Fclock-clipart-png-clipart-simple-clock-2400.png&f=1&nofb=1&ipt=118d0b62a50766203a9fac54022c32ca0b72cca9b4269e9ee867c8823d6e39cd&ipo=images">
+        <img class="slide1-img4" alt="help" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fquestion_mark%2Fquestion_mark_PNG130.png&f=1&nofb=1&ipt=017f4d9e6046fde2edc563fadb7cb6d21e58c07e54a1f54eb02752d54b2cedbf&ipo=images">
+    </div>
+
+    <div id="slide2" class="slide">
+        <div class="title">
+            <h1>настоящий друг всегда должен предержать дла тебя тарелку с пельменями.</h1>
+        </div>
+    </div>
+    <div id="slide3" class="slide">
+        <div class="title">
+            <h1>всегда рядом когда что то случается</h1>
+            <div class="sep"></div>
+            <h2>"я не хотел есть светофор в одиночку, поэтому попросил своего друга съесть светофор вместе со мной. хорошо, что он был рядом."</h2>
+            <br>
+            <h2>"друг этот тот человек который подаст туалетную бумагу когда она закончилась"</h2>
+            <br>
+            <h2>"друг это человек, который говорит вам, что нельзя использовать микроволновку как принтер"</h2>
+            <div class="sep"></div>
+            <div class="sep"></div>
+            <div class="sep"></div>
+            <h1>выслушивает тебя</h1>
+            <div class="sep"></div>
+            <h2>"у меня было плохое настроение, и я рад, что смог поговорить со своим настоящим другом. теперь я могу есть свои светофоры."</h2>
+            <br>
+            <h2>"у нас дома не было туалетной бумаги, и мне нужно было с кем то поговорить"</h2>
+            <br>
+            <h2>"я почти использовал свою микроволновку как принте"</h2>
+
+        </div>
+    </div>
+    <div id="slide4" class="slide">
+        <div class="title">
+            <h1>не нужно ничего скрывать</h1>
+            <div class="sep"></div>
+            <h2>"я не побоялся сказать своему лучшему другу, что съел все светофоры."</h2>
+            <br>
+            <h2>"Я не боялся, что мой друг принесет туалетную бумагу."</h2>
+            <br>
+            <h2>"друг это человек, которому можно доверять, если он использовал микроволновку как принтер"</h2>
+            <div class="sep"></div>
+            <div class="sep"></div>
+            <div class="sep"></div>
+            <h1>с ним действительно интересно поговорить</h1>
+            <div class="sep"></div>
+            <h2>"мы смеялись и разговаривали, пока мы ели светофор."</h2>
+            <br>
+            <h2>"у нас дома не было туалетной бумаги, но это не страшно, потому что мой друг дал мне компанию."</h2>
+            <br>
+            <h2>"мой друг привел мне много причин, почему я не должен использовать микроволновку как принтер. Мы хорошо поговорили."</h2>
+
+        </div>
+    </div>
+    <div id="slide5" class="slide active">
+
+    </div>
+</body>
+
+<style>
+:root {
+       /* Backgrounds */
+       --bg: rgb(22, 22, 22);
+       --bg2: rgb(41, 41, 41);
+       --bgtrans: rgba(0, 0, 0, 0.2);
+       --bgtrans2: rgba(255, 255, 255, 0.01);
+
+       /* Text */
+       --txt: rgb(231, 231, 231);
+
+       /* Colors */
+       --pri: rgb(var(--primary));
+       --pri2: rgba(var(--primary), 0.2);
+       --sec: rgb(114, 232, 253);
+
+       --primary: 39, 236, 120;
+       /* Some important stuff */
+       --header-width: auto;
+}
+
+html {
+    overflow: hidden;
+}
+* {
+    border-radius: 0;
+}
+
+h1, h2 {
+    font-family: "jetbrains mono",sans-serif;
+}
+
+#slide0 {
+    background: var(--bg);
+    transition: 0.3s ease 0.2s;
+
+    &.active {
+        opacity: 1;
+
+        .decor {
+            img {
+                transition: 0.3s ease;
+                translate: -50% -50%;
+            }
+        }
+        .title {
+            h1 {
+                translate: 0% 0%;
+            }
+            h2 {
+                translate: 0% 0%;
+            }
+        }
+    }
+
+    .title {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+
+        h1 {
+            color: var(--bg);
+            background: var(--pri);
+            padding: 20px;
+            font-size: 60px;
+            box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.5);
+            translate: 0% -100%;
+            transition: 0.2s ease;
+        }
+        h2 {
+            translate: 0% -100%;
+            transition: 0.2s ease 0.1s;
+        }
+    }
+    .decor {
+        position: absolute;
+        background: var(--pri2);
+        width: 1000px;
+        height: 150px;
+        bottom: -75px;
+        left: 50%;
+        translate: -50% 0%;
+        border-radius: 50%;
+        filter: blur(0vmax);
+
+        img {
+            position: absolute;
+            width: 150svh;
+            left: 50%;
+            translate: -50% 50%;
+            transition: 0.3s ease;
+        }
+    }
+}
+#slide1 {
+    background: var(--bg);
+
+    &.active {
+        opacity: 1;
+
+        .decor {
+            scale: 15;
+            transition-delay: 0.3s;
+        }
+        .text {
+            transition-delay: 0.3s;
+            opacity: 1;
+
+            h1 {
+                transition-delay: 0.5s;
+                opacity: 1;
+                translate: 0% 0%;
+            }
+            h2 {
+                transition-delay: 0.6s;
+                opacity: 1;
+                translate: 0% 0%;
+            }
+        }
+        .slide1-img1 {
+            opacity: 1;
+            scale: 1;
+            transition-delay: 0.6s;
+        }
+        .slide1-img2 {
+            opacity: 1;
+            scale: 1;
+            transition-delay: 0.8s;
+        }
+        .slide1-img3 {
+            opacity: 1;
+            scale: 1;
+            transition-delay: 1s;
+        }
+        .slide1-img4 {
+            opacity: 1;
+            scale: 1;
+            transition-delay: 1.2s;
+        }
+    }
+
+    .decor {
+        position: absolute;
+        background: var(--pri2);
+        width: 1000px;
+        height: 150px;
+        bottom: -75px;
+        left: 50%;
+        translate: -50% 0%;
+        border-radius: 50%;
+        filter: blur(0vmax);
+        transition: 0.3s ease-out;
+        z-index: -1;
+    }
+
+    .text {
+        position: absolute;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        top: 50%;
+        left: 100px;
+        translate: 0% -50%;
+        opacity: 0;
+
+        h1 {
+            font-size: 50px;
+            padding: 10px 20px;
+            color: var(--pri);
+            transition: 0.3s ease;
+            translate: 10% 0%;
+            opacity: 0;
+        }
+        h2 {
+            margin-left: 50px;
+            transition: 0.3s ease;
+            translate: 10% 0%;
+            opacity: 0;
+        }
+        .sep {
+            height: 30px;
+        }
+    }
+
+    .decor1 {
+        position: absolute;
+        height: 2000px;
+        background: var(--bg);
+        width: 1000px;
+        rotate: 20deg;
+        top: 50%;
+        translate: 0% -50%;
+        right: -400px;
+    }
+    .slide1-img1 {
+        position: absolute;
+        height: 500px;
+        rotate: -38deg;
+        right: -50px;
+        filter: saturate(0) brightness(2);
+        opacity: 0;
+        scale: 0.7;
+        transition: 0.5s ease;
+    }
+    .slide1-img2 {
+        position: absolute;
+        height: 200px;
+        top: 350px;
+        rotate: 20deg;
+        right: 0px;
+        filter: saturate(0) brightness(2);
+        opacity: 0;
+        scale: 0.7;
+        transition: 0.5s ease;
+    }
+    .slide1-img3 {
+        position: absolute;
+        height: 300px;
+        top: 500px;
+        rotate: 20deg;
+        right: 300px;
+        filter: saturate(0) brightness(2);
+        opacity: 0;
+        scale: 0.7;
+        transition: 0.5s ease;
+    }
+    .slide1-img4 {
+        position: absolute;
+        height: 500px;
+        top: 700px;
+        rotate: -15deg;
+        right: -100px;
+        filter: saturate(0) brightness(1);
+        opacity: 0;
+        scale: 0.7;
+        transition: 0.5s ease;
+    }
+}
+#slide2 {
+    transition: 0.3s ease 0.2s;
+
+    .title {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+
+        h1 {
+            color: black;
+            background: rgb(255, 45, 45);
+            padding: 20px;
+            font-size: 60px;
+            box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.5);
+            transition: 0.2s ease;
+            text-align: center;
+            animation: warning 2s ease-in-out infinite;
+
+            &:hover {
+                animation: warning 2s ease-in-out infinite,
+                    warning2 0.3s linear infinite;
+            }
+        }
+    }
+}
+#slide3, #slide4 {
+    background: var(--bg);
+
+    &.active {
+        opacity: 1;
+
+        .title {
+            h1 {
+                color: var(--bg);
+                transition-delay: 0.5s;
+            }
+            h2 {
+                opacity: 1;
+                translate: 0% 0%;
+                transition-delay: 0.8s;
+            }
+        }
+    }
+
+    .title {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+
+        h1 {
+            color: transparent;
+            background: var(--pri);
+            padding: 20px;
+            font-size: 60px;
+            width: 100%;
+            box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.5);
+            transition: 0.3s ease;
+        }
+        .sep {
+            height: 50px;
+        }
+        h2 {
+            padding-left: 50px;
+            font-size: 30px;
+            position: relative;
+            opacity: 0;
+            translate: 5% 0%;
+            transition: 0.3s ease;
+            
+            &:before {
+                position: absolute;
+                content: '';
+                background: var(--txt);
+                top: 0px;
+                left: 20px;
+                height: 100%;
+                width: 10px;
+            }
+        }
+    }
+}
+#slide5 {
+    background: var(--bg);
+}
+
+@keyframes warning {
+    from {
+        background: rgb(255, 45, 45);
+    }
+    50% {
+        background: rgb(196, 14, 14);
+    }
+    to {
+        background: rgb(255, 45, 45);
+    }
+}
+@keyframes warning2 {
+    from {
+        translate: 0% 0%;
+    }
+    10% {
+        translate: -0.2% 1%;
+    }
+    20% {
+        translate: 0.2% -1%;
+    }
+    30% {
+        translate: 0% 0.5%;
+    }
+    40% {
+        translate: -0.1% -0.8%;
+    }
+    50% {
+        translate: 0.1% 0%;
+    }
+    60% {
+        translate: -0.2% -0.5%;
+    }
+    70% {
+        translate: 0.2% 0.8%;
+    }
+    80% {
+        translate: -0.1% -0.2%;
+    }
+    90% {
+        translate: 0% 0.2%;
+    }
+    to {
+        translate: 0% 0%;
+    }
+}
+
+
+</style>
