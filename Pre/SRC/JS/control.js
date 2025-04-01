@@ -27,8 +27,18 @@ $(document).ready(function() {
                $("#slidenumber").text($activeSlide.attr("id")); // Update #slidernumber text
            }
        }
-   
-       // Run updateSlideNumber every 500ms (0.5s)
-       setInterval(updateSlideNumber, 500);
-   });
+    // Run updateSlideNumber every 500ms (0.5s)
+    setInterval(updateSlideNumber, 500);
+});
+$(document).ready(function() {
+    $('#fullscreenApplication').click(function() {
+        if (!document.fullscreenElement) {
+            // Enter fullscreen
+            document.documentElement.requestFullscreen();
+        } else {
+            // Exit fullscreen
+            document.exitFullscreen();
+        }
+    });
+});
    

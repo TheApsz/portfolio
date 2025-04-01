@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
        setInterval(function() {
-           let randomNum = Math.floor(Math.random() * 21) + 40; // Random number between 40 and 60
+           let randomNum = Math.floor(Math.random() * 21) + 100; // Random number between 40 and 60
            $("#tick-random").text(randomNum);
        }, 50);
    });
@@ -18,7 +18,7 @@ $(document).ready(function() {
        setInterval(function() {
            backendPing++;
            $("#backendping").text(backendPing);
-       }, 30);
+       }, 100);
    
        // Add 3650 when any .control-button is clicked
        $(".control-button").click(function() {

@@ -80,11 +80,13 @@
        scale: 0.9;
        opacity: 0;
        translate: 0% 10px;
+       pointer-events: none;
 
        &.active {
               scale: 1;
               opacity: 1;
               translate: 0px 0px;
+              pointer-events: auto;
        }
 
        .control-wrapper, .control-wrapper-h {
