@@ -1,0 +1,99 @@
+#hero {
+    background: black;
+    position: relative;
+    padding: 30px 0px;
+    background: transparent;
+    width: 1300px;
+    height: 100svh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+
+    .images {
+        position: relative;
+        background: transparent;
+        flex: 1;
+        height: 500px;
+
+        .decor {
+            position: absolute;
+            aspect-ratio: 1;
+            width: 200px;
+            background: var(--pri);
+            filter: blur(5vmax);
+            right: 0;
+        }
+        .decor2 {
+            position: absolute;
+            aspect-ratio: 1;
+            width: 200px;
+            background: var(--sec);
+            filter: blur(5vmax);
+            bottom: 0;
+        }
+
+        .image {
+            position: absolute;
+            aspect-ratio: 1;
+            height: 225px;
+            background: transparent;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: float 3s ease-in-out infinite;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            &.i169 {
+                aspect-ratio: 16/9;
+            }
+            &:nth-child(3) {
+                transform: translate(-25%, -40%) !important;
+                rotate: -5deg;
+                animation-delay: 0.3s !important;
+            }
+            &:nth-child(4) {
+                transform: translate(10%, 30%) !important;
+                rotate: 8deg;
+                animation-delay: 0s !important;
+            }
+        }
+    }
+
+    .title {
+        background: transparent;
+        flex: 1;
+
+        h1 {
+            font-size: 70px;
+
+            span {
+                color: var(--pri);
+            }
+        }
+        .desc {
+            margin-top: 15px;
+            font-size: 30px;
+        }
+    }
+}
+
+
+@keyframes float {
+    0% {
+        translate: -50% -50%;
+    }
+    50% {
+        translate: -50% -55%;
+    }
+    100% {
+        translate: -50% -50%;
+    }
+}

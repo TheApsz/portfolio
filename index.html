@@ -34,8 +34,98 @@
 <html lang="en">
 
 <body>
-Client access denied<br>
-returned with error: 103(Could not load content from server)<br>
+<div id="intro" class="inactive">
+    <h3>Hey! Let's go on an adventure, shall we? <br>
+        <span>Click me</span>
+    </h3>
+    <span class="material-symbols-rounded">keyboard_arrow_down</span>
+    <div id="introChar">
+        <img src="https://polargram.pages.dev/API/Character/hallo.png" alt="Intro Character">
+    </div>
+    <div id="introSkip" class="button">
+        <h3>Skip</h3>
+    </div>
+</div>
+<div id="main">
+    <div id="hero" class="active">
+        <div class="images">
+            <div class=decor></div>
+            <div class=decor2></div>
 
-<div id="main"></div>
+            <div class="image i169 heroContent">
+                <img class="heroContent-h" src="SRC/images/VRChat_2025-03-29_21-23-31.904_1920x1080.png" alt="Apsz">
+            </div>
+            <div class="image i169 heroContent">
+                <img class="heroContent-h" src="SRC/images/VRChat_2025-05-10_13-47-24.371_1920x1080.png" alt="Apsz">
+            </div>
+        </div>
+        <div class="title heroContent">
+            <h1 class="heroContent-h">Hey! i'm <span>Apsz</span></h1>
+            <h2 class="heroContent-h desc">Frontend web developer</h2>
+        </div>
+    </div>
+    <div id="experience" class="section">
+        <div id="html" class="card">
+            <h3>>3 years of</h3>
+            <div class="content">
+                <div class="image">
+                    <img src="SRC/images/html.png" alt="html">
+                </div>
+                <h1>HTML</h1>
+            </div>
+            <h2>Structure for web content</h2>
+        </div>
+        <div id="css" class="card">
+            <h3>>3 years of</h3>
+            <div class="content">
+                <div class="image">
+                    <img src="SRC/images/css.png" alt="css">
+                </div>
+                <h1>CSS</h1>
+            </div>
+            <h2>Style for web content</h2>
+        </div>
+        <div id="js" class="card">
+            <h3>2 years of</h3>
+            <div class="content">
+                <div class="image">
+                    <img src="SRC/images/javascript.png" alt="javascript">
+                </div>
+                <h1>JavaScript</h1>
+            </div>
+            <h2>Make sites interactive</h2>
+        </div>
+        <div id="jquery" class="card">
+            <h3>&lt;2 years of</h3>
+            <div class="content">
+                <div class="image">
+                    <img src="SRC/images/jquery.png" alt="jquery">
+                </div>
+                <h1>jQuery</h1>
+            </div>
+            <h2>A JavaScript library</h2>
+        </div>
+    </div>
+</div>
 </body>
+
+<style>
+:root {
+       /* Backgrounds */
+       --bg: rgb(11, 11, 13);
+       --bg2: rgba(16, 16, 18, 1);
+       --bgtrans: rgba(0, 0, 0, 0.2);
+       --bgtrans2: rgba(255, 255, 255, 0.01);
+
+       /* Text */
+       --txt: rgb(236, 241, 233);
+
+       /* Colors */
+       --pri: rgb(236, 39, 39);
+       --pri2: rgba(236, 39, 39, 0.2);
+       --sec: rgb(253, 114, 114);
+
+       /* Some important stuff */
+       --header-width: auto;
+}
+</style>
