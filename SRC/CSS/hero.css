@@ -1,5 +1,5 @@
 #hero {
-    background: black;
+    background: transparent;
     position: relative;
     padding: 30px 0px;
     background: transparent;
@@ -14,55 +14,46 @@
 
     .images {
         position: relative;
-        background: transparent;
         flex: 1;
-        height: 500px;
+        height: 100svh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: transparent;
 
-        .decor {
-            position: absolute;
-            aspect-ratio: 1;
-            width: 200px;
-            background: var(--pri);
-            filter: blur(5vmax);
-            right: 0;
-        }
-        .decor2 {
-            position: absolute;
-            aspect-ratio: 1;
-            width: 200px;
-            background: var(--sec);
-            filter: blur(5vmax);
-            bottom: 0;
-        }
 
         .image {
             position: absolute;
-            aspect-ratio: 1;
-            height: 225px;
+            height: 100svh;
+            width: 40vmax;
             background: transparent;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: float 3s ease-in-out infinite;
+            right: 0px;
+            display: flex;
+            justify-content: right;
+            align-items: center;
+
+            &:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+                background: linear-gradient(180deg, transparent 80%, var(--bg) 95%);
+            }
 
             img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
+                background: transparent;
+                right: 0px;
+                aspect-ratio: 1;
             }
 
             &.i169 {
-                aspect-ratio: 16/9;
-            }
-            &:nth-child(3) {
-                transform: translate(-25%, -40%) !important;
-                rotate: -5deg;
-                animation-delay: 0.3s !important;
-            }
-            &:nth-child(4) {
-                transform: translate(10%, 30%) !important;
-                rotate: 8deg;
-                animation-delay: 0s !important;
+                aspect-ratio: 1/1;
             }
         }
     }
@@ -72,7 +63,8 @@
         flex: 1;
 
         h1 {
-            font-size: 70px;
+            font-size: 5.5vmax;
+            text-wrap: nowrap;
 
             span {
                 color: var(--pri);
@@ -80,7 +72,8 @@
         }
         .desc {
             margin-top: 15px;
-            font-size: 30px;
+            font-size: 2.5vmax;
+            text-wrap: nowrap;
         }
     }
 }
