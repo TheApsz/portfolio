@@ -13,7 +13,7 @@
         justify-content: center;
         align-items: center;
         gap: 20px;
-        perspective: 100000px;
+        perspective: 15000px;
 
         .card-hover {
             display: flex;
@@ -21,7 +21,7 @@
             justify-content: space-between;
             gap: 5px;
             aspect-ratio: 2/3;
-            width: 250px;
+            width: 17vmax;
             background: var(--bg2);
             padding: 10px;
             transform-style: preserve-3d;
@@ -29,7 +29,7 @@
 
             &:hover {
                 scale: 1.1;
-                background: var(--trans);
+                background: rgba(255,255,255,0.025);
                 z-index: 1;
 
                 .color {
