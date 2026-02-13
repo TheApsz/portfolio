@@ -25,15 +25,15 @@
         background: transparent;
         display: flex;
         width: 100%;
-        max-height: 75%;
+        height: 100%;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-bottom: 100px;
 
         .thing {
             position: relative;
-            width: 700px;
+            flex: 1;
+            width: 100%;
         }
 
 
@@ -43,28 +43,30 @@
             flex-direction: column;
             justify-content: start;
             align-items: center;
-            padding-top: 10px;
+            padding-top: 1vmax;
             height: 500px;
+            width: 100%;
 
             h1 {
                 color: var(--pri);
-                font-size: 120px;
+                font-size: 8vmax;
                 opacity: 0;
                 animation: text 0.5s forwards ease 0.1s;
             }
             h2 {
-                margin-top: 15px;
-                font-size: 50px;
+                margin-top: 1.7vmax;
+                font-size: 1.8vmax;
                 opacity: 0;
                 animation: text2 0.5s forwards ease 0.3s;
             }
             h3 {
+                font-size: 1vmax;
                 opacity: 0;
                 animation: text3 0.5s forwards ease 0.5s;
             }
         }
         .image {
-            height: 400px;
+            height: 1vmax;
             translate: 0% 20%;
             animation: image 1s forwards ease 0.2s;
             opacity: 0;
@@ -76,6 +78,23 @@
             }
         }
 
+    }
+    .decor2 {
+        position: absolute;
+        bottom: 0px;
+        background: transparent;
+        max-height: 20svh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        span {
+            font-size: 3vmax;
+            margin-bottom: 1vmax;
+            color: var(--pri2);
+            font-weight: 800;
+        }
     }
 }
 @keyframes blob {
@@ -135,4 +154,19 @@
         opacity: 0.5;
         filter: blur(0vmax);
     }
+}
+@keyframes stupid {
+    from {
+        rotate: -20deg;
+        translate: 0% -10%;
+    }
+    50% {
+        rotate: 20deg;
+        translate: 0% 10%;
+    }
+    to {
+        rotate: -20deg;
+        translate: 0% -10%;
+    }
+
 }
