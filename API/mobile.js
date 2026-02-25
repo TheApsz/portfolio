@@ -1,15 +1,14 @@
-$(document).ready(function() {  
+$(document).ready(function() {
   function updateClasses() {
     if ($(window).width() < 1100) {
-      $('.Wcheck').removeClass('Wcheck').addClass('mobile');
       $('.desktop').hide();
+      $('.mobile').show();
     } else {
-      $('.Wcheck').removeClass('Wcheck').addClass('desktop');
+      $('.desktop').show();
       $('.mobile').hide();
     }
   }
-
-  updateClasses();
   
-  $(window).resize(updateClasses);
+  updateClasses();
+  window.addEventListener('resize', updateClasses);
 });

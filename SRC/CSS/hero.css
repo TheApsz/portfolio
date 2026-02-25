@@ -1,92 +1,172 @@
 #hero {
-    background: transparent;
-    position: relative;
-    padding: 30px 0px;
-    background: transparent;
-    width: 1300px;
+    position: absolute;
+    background: var(--bg);
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100svh;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 20px;
 
-
-    .images {
+    .decor {
+        position: absolute;
+        background: var(--pri);
+        aspect-ratio: 1;
+        height: 12vmax;
+        border-radius: 50%;
+        filter: blur(7vmax);
+        z-index: 0;
+        opacity: 0;
+        animation: blob 2s forwards;
+    }
+    .wrapper {
         position: relative;
-        flex: 1;
-        height: 100svh;
+        background: transparent;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .thing {
+            position: relative;
+            flex: 1;
+            width: 100%;
+        }
+
+
+        .text {
+            background: linear-gradient(to top, var(--bg) 80%, transparent );
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            padding-top: 1vmax;
+            height: 500px;
+            width: 100%;
+
+            h1 {
+                color: var(--pri);
+                font-size: 8vmax;
+                opacity: 0;
+                animation: text 0.5s forwards ease 0.1s;
+            }
+            h2 {
+                margin-top: 1.7vmax;
+                font-size: 1.8vmax;
+                opacity: 0;
+                animation: text2 0.5s forwards ease 0.3s;
+            }
+            h3 {
+                font-size: 1vmax;
+                opacity: 0;
+                animation: text3 0.5s forwards ease 0.5s;
+            }
+        }
+        .image {
+            height: 1vmax;
+            translate: 0% 20%;
+            animation: image 1s forwards ease 0.2s;
+            opacity: 0;
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+
+    }
+    .decor2 {
+        position: absolute;
+        bottom: 0px;
+        background: transparent;
+        max-height: 20svh;
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        background: transparent;
 
-
-        .image {
-            position: absolute;
-            height: 100svh;
-            width: 40vmax;
-            background: transparent;
-            right: 0px;
-            display: flex;
-            justify-content: right;
-            align-items: center;
-
-            &:before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                z-index: 1;
-                background: linear-gradient(180deg, transparent 80%, var(--bg) 95%);
-            }
-
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                background: transparent;
-                right: 0px;
-                aspect-ratio: 1;
-            }
-
-            &.i169 {
-                aspect-ratio: 1/1;
-            }
-        }
-    }
-
-    .title {
-        background: transparent;
-        flex: 1;
-
-        h1 {
-            font-size: 5.5vmax;
-            text-wrap: nowrap;
-
-            span {
-                color: var(--pri);
-            }
-        }
-        .desc {
-            margin-top: 15px;
-            font-size: 2.5vmax;
-            text-wrap: nowrap;
+        span {
+            font-size: 3vmax;
+            margin-bottom: 1vmax;
+            color: var(--pri2);
+            font-weight: 800;
         }
     }
 }
-
-
-@keyframes float {
-    0% {
-        translate: -50% -50%;
+@keyframes blob {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes image {
+    from {
+        translate: 0% 30%;
+        opacity: 0;
+        rotate: 10deg;
+        filter: blur(1vmax);
+    }
+    to {
+        translate: 0% 20%;
+        opacity: 1;
+        rotate: 0;
+        filter: blur(0vmax);
+    }
+}
+@keyframes text {
+    from {
+        translate: 0% 50%;
+        opacity: 0;
+        filter: blur(1.5vmax);
+    }
+    to {
+        translate: 0% 0%;
+        opacity: 1;
+        filter: blur(0vmax);
+    }
+}
+@keyframes text2 {
+    from {
+        translate: 0% 50%;
+        opacity: 0;
+        filter: blur(1.5vmax);
+    }
+    to {
+        translate: 0% 0%;
+        opacity: 0.8;
+        filter: blur(0vmax);
+    }
+}
+@keyframes text3 {
+    from {
+        translate: 0% 50%;
+        opacity: 0;
+        filter: blur(1.5vmax);
+    }
+    to {
+        translate: 0% 0%;
+        opacity: 0.5;
+        filter: blur(0vmax);
+    }
+}
+@keyframes stupid {
+    from {
+        rotate: -20deg;
+        translate: 0% -10%;
     }
     50% {
-        translate: -50% -55%;
+        rotate: 20deg;
+        translate: 0% 10%;
     }
-    100% {
-        translate: -50% -50%;
+    to {
+        rotate: -20deg;
+        translate: 0% -10%;
     }
+
 }
