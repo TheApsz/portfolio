@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+
+:root {
+       /* Backgrounds */
+       --bg: rgba(11, 11, 13, 1);
+       --bg2: rgb(16, 16, 18);
+       --bgtrans: rgba(0, 0, 0, 0.2);
+       --bgtrans2: rgba(255, 255, 255, 0.01);
+
+       /* Text */
+       --txt: rgb(236, 241, 233);
+
+       /* Colors */
+       --primary: 236, 39, 39;
+       --secondary: 253, 114, 114;
+       --pri: rgb(var(--primary));
+       --pri2: rgba(var(--primary), 0.2);
+       --sec: rgb(var(--secondary));
+       --sec2: rgba(var(--secondary), 0.2);
+
+       /* Some important stuff */
+       --br: 10px;
+}
+html {
+       touch-action: manipulation;
+       background: var(--bg);
+       overflow-x: hidden;
+}
+* {
+       margin: 0;
+       min-width: 0;
+       padding: 0;
+       border-radius: var(--br);
+       box-sizing: border-box;
+       font-family: 'Space Grotesk', sans-serif;
+}
+a {
+       text-decoration: none;
+       color: inherit;
+}
+
+body {
+       color: var(--txt);
+       background: var(--bg);
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       flex-direction: column;
+       gap: 30px;
+       min-height: 100svh;
+       overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, p, div {
+       color: var(--txt);
+       font-weight: 500;
+       letter-spacing: -0.8px;
+       text-rendering: geometricPrecision;
+       font-smooth: always;
+}
+h1 {
+       line-height: 0.8;
+}
+h2 {
+       font-weight: 300;
+       line-height: 1.5;
+       letter-spacing: 0;
+}
+
+
+/* Target WebKit browsers (Chrome, Safari, etc.) */
+*::-webkit-scrollbar {
+       width: 1px; /* Adjust width as desired */
+}
+*::-webkit-scrollbar-track {
+       background: transparent; /* Customize track background color */
+       border-radius: 10px; /* Add rounded corners */
+}
+     
+*::-webkit-scrollbar-thumb {
+       background: transparent; /* Customize thumb color */
+       border-radius: 10px; /* Add rounded corners */
+       transition: all 0.25s ease;
+}
+*::-webkit-scrollbar-thumb:hover {
+       background: var(--pri); /* Customize thumb color */
+       border-radius: 10px; /* Add rounded corners */
+}
+
+::selection {
+       color: white; /* Change the text color */
+       background-color: var(--bgtrans); /* Change the background color */
+}
+
+
+@-moz-document url-prefix() {
+       .trans-low:before,
+       .trans-med:before,
+       .trans-high:before {
+              background: var(--bg2);
+              backdrop-filter: none !important;
+       }
+}
+.trans-low, .trans-med, .trans-high {
+       position: relative;
+}
+
+.trans-low:before, .trans-med:before, .trans-high:before {
+       content: '';
+       position: absolute;
+       width: 100%;
+       height: 100%;
+       top: 0;
+       left: 0;
+       border-radius: inherit;
+       z-index: -1;
+       justify-self: center;
+       align-self: center;
+       pointer-events: none;
+}
+.trans-low:before {
+       backdrop-filter: blur(8px);
+}
+.trans-med:before {
+       backdrop-filter: blur(20px);
+}
+.trans-high:before {
+       backdrop-filter: blur(40px);
+}
+
+/* If SVG filter in backdrop-filter is supported, use it (Chromium only) */
+@supports (backdrop-filter: url(#frost-low)) {
+       .trans-low:before { backdrop-filter: url(#frost-low); }
+}
+@supports (backdrop-filter: url(#frost-med)) {
+       .trans-med:before { backdrop-filter: url(#frost-med); }
+}
+@supports (backdrop-filter: url(#frost-high)) {
+       .trans-high:before { backdrop-filter: url(#frost-high); }
+}
+
+.button {
+       cursor: pointer;
+       transition: transform var(--S1);
+
+       &:active {
+              transform: scale(0.95);
+       }
+}
