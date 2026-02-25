@@ -1,4 +1,5 @@
-function updateClasses() {
+$(document).ready(function() {  
+  function updateClasses() {
     if ($(window).width() < 1100) {
       $('.Wcheck').removeClass('Wcheck').addClass('mobile');
       $('.desktop').hide();
@@ -11,3 +12,4 @@ function updateClasses() {
   updateClasses();
   
   $(window).resize(updateClasses);
+});
