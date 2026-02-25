@@ -22,8 +22,8 @@
 
     <link rel="icon" href="og-image.png" type="image/x.icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cash/8.1.5/cash.min.js"></script>
-    <script type="module" src="https://polargram.pages.dev/API/import.js" defer></script>
-    <link rel="stylesheet" href="https://polargram.pages.dev/API/import.css">
+    <script type="module" src="API/import.js" defer></script>
+    <link rel="stylesheet" href="API/import.css">
 </head>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
@@ -34,149 +34,29 @@
 
 <body>
 <div id="main">
-    <div id="hero" class="active">
-        <div class="images">
-            <div class="image i169 heroContent">
-                <img class="heroContent-h" src="SRC/images/Untitled-2.png" alt="Apsz">
+    <div id="hero">
+        <div class="decor"></div>
+        <div class="wrapper">
+            <div class="image thing">
+                <img src="SRC/images/Untitled-2.png" alt="Title image">
+            </div>
+            <div class="text thing">
+                <h1>Apsz</h1>
+                <h2>Frontend web developer</h2>
+                <div class="buttonWrapper">
+                    <h3>Wow that was pretty cool</h3>
+                </div>
             </div>
         </div>
-        <div class="title heroContent">
-            <h1 class="heroContent-h">Hey! i'm <span>Apsz</span></h1>
-            <h2 class="heroContent-h desc">Frontend web developer</h2>
+        <div class="decor2">
+            <span class="material-symbols-rounded">keyboard_arrow_down</span>
         </div>
     </div>
-    <div id="experience" class="section">
-        <div id="ex-cards">
-            <div class="html card-hover border button">
-                <div class="info top">
-                    <img src="SRC/images/html.png">
-                    <h2>4 Years</h2>
-                </div>
-                <div class="info mid">
-                    <div class="wrapper">
-                        <div class="img-wrapper">
-                            <img src="SRC/images/html.png">
-                        </div>
-                        <h3>HTML</h3>
-                    </div>
-                </div>
-                <div class="info bottom">
-                    <img src="SRC/images/html.png">
-                    <h2>4 Years</h2>
-                </div>
-                <div class="decor trans-high"></div>
-                <div class="color"></div>
-            </div>
-            <div class="css card-hover border button">
-                <div class="info top">
-                    <img src="SRC/images/css.png">
-                    <h2>4 Years</h2>
-                </div>
-                <div class="info mid">
-                    <div class="wrapper">
-                        <div class="img-wrapper">
-                            <img src="SRC/images/css.png">
-                        </div>
-                        <h3>CSS</h3>
-                    </div>
-                </div>
-                <div class="info bottom">
-                    <img src="SRC/images/css.png">
-                    <h2>4 Years</h2>
-                </div>
-                <div class="decor trans-high"></div>
-                <div class="color"></div>
-            </div>
-            <div class="js card-hover border button">
-                <div class="info top">
-                    <img src="SRC/images/javascript.png">
-                    <h2>3 Years</h2>
-                </div>
-                <div class="info mid">
-                    <div class="wrapper">
-                        <div class="img-wrapper">
-                            <img src="SRC/images/javascript.png">
-                        </div>
-                        <h3>JavaScript</h3>
-                    </div>
-                </div>
-                <div class="info bottom">
-                    <img src="SRC/images/javascript.png">
-                    <h2>3 Years</h2>
-                </div>
-                <div class="decor trans-high"></div>
-                <div class="color"></div>
-            </div>
-            <div class="jq card-hover border button">
-                <div class="info top">
-                    <img src="SRC/images/jquery.png">
-                    <h2>2 Years</h2>
-                </div>
-                <div class="info mid">
-                    <div class="wrapper">
-                        <div class="img-wrapper">
-                            <img src="SRC/images/jquery.png">
-                        </div>
-                        <h3>jQuery</h3>
-                    </div>
-                </div>
-                <div class="info bottom">
-                    <img src="SRC/images/jquery.png">
-                    <h2>2 Years</h2>
-                </div>
-                <div class="decor trans-high"></div>
-                <div class="color"></div>
-            </div>
-
-
-            <div class="ts card-hover border button">
-                <div class="info top">
-                    <img src="SRC/images/typescript.png">
-                    <h2><1 Year</h2>
-                </div>
-                <div class="info mid">
-                    <div class="wrapper">
-                        <div class="img-wrapper">
-                            <img src="SRC/images/typescript.png">
-                        </div>
-                        <h3>TypeScript</h3>
-                    </div>
-                </div>
-                <div class="info bottom">
-                    <img src="SRC/images/typescript.png">
-                    <h2><1 Year</h2>
-                </div>
-                <div class="decor trans-high"></div>
-                <div class="color"></div>
-            </div> 
-        </div>
-    </div>
-
-    <div id="aboutgrid" class="section">
-        <div class="grid-wrapper"></div>
-    </div>
+    <div class="section"></div>
 </div>
 </body>
 
 <style>
-:root {
-       /* Backgrounds */
-       --bg: rgb(11, 11, 13);
-       --bg2: rgba(16, 16, 18, 1);
-       --bgtrans: rgba(0, 0, 0, 0.2);
-       --bgtrans2: rgba(255, 255, 255, 0.01);
-
-       /* Text */
-       --txt: rgb(236, 241, 233);
-
-       /* Colors */
-       --pri: rgb(236, 39, 39);
-       --pri2: rgba(236, 39, 39, 0.2);
-       --sec: rgb(253, 114, 114);
-
-       /* Some important stuff */
-       --header-width: auto;
-}
 </style>
 
 <script>

@@ -1,0 +1,36 @@
+.section {
+       position: relative;
+       padding: 30px 0px;
+       background: transparent;
+       width: 1300px;
+}
+.section-sec {
+       position: relative;
+       padding: 30px 0px;
+       background: transparent;
+       width: 1300px;
+       display: flex;
+       flex-direction: column;
+       gap: 30px;
+
+       .title {
+              position: relative;
+              padding: 10px 10px;
+              padding-left: 20px;
+              overflow: hidden;
+              color: var(--pri);
+
+              &:before {
+                     position: absolute;
+                     top: 50%;
+                     left: 0;
+                     translate: -50% -50%;
+                     opacity: 0.5;
+                     content: '';
+                     background: linear-gradient(to right, var(--pri), transparent 90%);
+                     height: 150%;
+                     width: 200px;
+                     border-radius: 50vmax;
+              }
+       }
+}
