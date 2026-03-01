@@ -1,11 +1,10 @@
 $(document).ready(function() {
   function updateClasses() {
-    if ($(window).width() < 1100) {
-      $('.desktop').hide();
-      $('.mobile').show();
+    if ($(window).width() < $(window).height()) {
+      $('.desktop').removeClass('desktop').addClass('mobile');
+      console.log('Mobile');
     } else {
-      $('.desktop').show();
-      $('.mobile').hide();
+        console.log('Desktop');
     }
   }
   
