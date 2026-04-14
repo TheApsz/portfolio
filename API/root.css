@@ -8,13 +8,13 @@
 
 :root {
        /* Backgrounds */
-       --bg: rgba(11, 11, 13, 1);
-       --bg2: rgb(16, 16, 18);
+       --bg: rgb(15, 14, 14);
+       --bg2: rgb(31, 30, 30);
        --bgtrans: rgba(0, 0, 0, 0.2);
        --bgtrans2: rgba(255, 255, 255, 0.01);
 
        /* Text */
-       --txt: rgb(236, 241, 233);
+       --txt: rgb(255, 255, 255);
 
        /* Colors */
        --primary: 236, 39, 39;
