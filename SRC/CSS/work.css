@@ -1,0 +1,65 @@
+#work {
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+
+    .workMain {
+        display: flex;
+
+        .half {
+            background: transparent;
+            flex: 1;
+        }
+
+        .workFlex {
+            h2 {
+                font-size: 20px;
+            }
+        }
+        .workGrid {
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+
+            .seperator {
+                background: rgb(94, 94, 94);
+                height: 1px;
+                width: 90%;
+            }
+            .card {
+                background: var(--bg2);
+                width: 100%;
+                padding: 25px;
+                opacity: 0.5;
+
+                &.cool {
+                    opacity: 1;
+
+                    h1, h3 {
+                        color: var(--pri);
+                    }
+                }
+
+                h1 {
+                    font-size: 32px;
+                }
+                h2 {
+                    font-size: 20px;
+                    opacity: 0.8;
+
+                    span {
+                        opacity: 0.5;
+                        color: var(--pri);
+                    }
+                }
+                h3 {
+                    font-size: 18px;
+                }
+            }
+        }
+
+    }
+}

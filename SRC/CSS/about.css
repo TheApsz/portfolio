@@ -1,0 +1,204 @@
+#aboutme {
+    margin-top: 100px;
+    display: flex;
+    background: transparent;
+    flex-direction: column;
+
+    .aboutmeGrid {
+        background: transparent;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 20px;
+
+        .card {
+            position: relative;
+            background: var(--bg2);
+            height: 200px;
+
+            &.big {
+                grid-column: span 2;
+            }
+
+            &:nth-child(1) {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+
+                div {
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    background: transparent;
+                    transition: var(--S1);
+
+
+                    &:hover {
+                        scale: 1.1;
+                        img {
+                            filter: grayscale(0);
+                        }
+                    }
+                    h2 {
+                        font-size: 22px;
+                        font-weight: 300;
+                    }
+                    p {
+                        font-size: 16px;
+                        opacity: 0.5;
+                        font-weight: 200;
+                    }
+                    
+                    img {
+                        background: transparent;
+                        height: 70px;
+                        object-fit: cover;
+                        scale: 0.8;
+                        filter: grayscale(1);
+                        transition: 0.2s ease;
+                    }
+                }
+            }
+            &:nth-child(2) {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+
+                p {
+                    opacity: 0.5;
+                    font-weight: 200;
+                }
+                h1 {
+                    color: var(--pri);
+                    font-size: 48px;
+                }
+            }
+            &:nth-child(3) {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+
+                .text {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                    scale: 1;
+
+                    p {
+                        opacity: 0.5;
+                        font-weight: 200;
+                    }
+                    h1 {
+                        color: var(--pri);
+                        font-size: 36px;
+                    }
+                    h2 {
+                        font-size: 16px;
+                    }
+                }
+                #audio {
+                    width: 90%;
+                    height: 40px;
+                    background: transparent;
+                    bottom: 20px;
+
+                    .audioButton {
+                        position: absolute;
+                        height: 40px;
+                        background: var(--txt);
+                        aspect-ratio: 1;
+                    }
+                    .audioProgress {
+                        position: absolute;
+                        height: 40px;
+                        background: var(--bg);
+                        width: calc(100% - 90px);
+                        right: 20px;
+                        overflow: hidden;
+
+                        .audioProgressFull {
+                            position: absolute;
+                            background: linear-gradient(to left, var(--pri), var(--pri2));
+                            height: 40px;
+                            width: 0%;
+                        }
+                    }
+                }
+            }
+            &:nth-child(4) {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+
+                img {
+                    position: absolute;
+                    aspect-ratio: 1;
+                    height: 300px;
+                    opacity: 0;
+                    filter: brightness(0.7);
+
+                    &:nth-child(1) {
+                        bottom: -100px;
+                        margin-right: 700px;
+                        rotate: 15deg;
+                        z-index: 1;
+                        opacity: 1;
+                    }
+                    &:nth-child(2) {
+                        bottom: -50px;
+                        margin-right: 550px;
+                        rotate: -15deg;
+                        opacity: 1;
+                    }
+                    &:nth-child(3) {
+                        bottom: -100px;
+                        margin-right: 450px;
+                        rotate: 15deg;
+                        opacity: 1;
+                        z-index: 1;
+                    }
+                    &:nth-child(4) {
+                        bottom: 0px;
+                        margin-right: 150px;
+                        rotate: 15deg;
+                        opacity: 1;
+                    }
+                    &:nth-child(5) {
+                        bottom: -100px;
+                        margin-right: 0px;
+                        rotate: -15deg;
+                        opacity: 1;
+                    }
+                    &:nth-child(6) {
+                        bottom: -100px;
+                        margin-right: -150px;
+                        rotate: 15deg;
+                        opacity: 1;
+                    }
+                    &:nth-child(7) {
+                        bottom: -100px;
+                        margin-right: -450px;
+                        rotate: -15deg;
+                        opacity: 1;
+                    }
+                    &:nth-child(8) {
+                        bottom: -75px;
+                        margin-right: -550px;
+                        rotate: -15deg;
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+}

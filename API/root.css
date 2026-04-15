@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
-/* @font-face {
-    font-family: '04B30';
-    src: url('FONT/O4B30.otf') format('truetype');
+
+@font-face {
+    font-family: 'SpaceGrotesk';
+    src: url('FONT/SpaceGrotesk.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-} */
+}
 
 :root {
        /* Backgrounds */
@@ -38,7 +38,7 @@ html {
        padding: 0;
        border-radius: var(--br);
        box-sizing: border-box;
-       font-family: 'space grotesk', sans-serif;
+       font-family: 'SpaceGrotesk', sans-serif;
 }
 a {
        text-decoration: none;
@@ -77,20 +77,6 @@ h2 {
 /* Target WebKit browsers (Chrome, Safari, etc.) */
 *::-webkit-scrollbar {
        width: 1px; /* Adjust width as desired */
-}
-*::-webkit-scrollbar-track {
-       background: transparent; /* Customize track background color */
-       border-radius: 10px; /* Add rounded corners */
-}
-     
-*::-webkit-scrollbar-thumb {
-       background: transparent; /* Customize thumb color */
-       border-radius: 10px; /* Add rounded corners */
-       transition: all 0.25s ease;
-}
-*::-webkit-scrollbar-thumb:hover {
-       background: var(--pri); /* Customize thumb color */
-       border-radius: 10px; /* Add rounded corners */
 }
 
 ::selection {
@@ -134,7 +120,6 @@ h2 {
        backdrop-filter: blur(40px);
 }
 
-/* If SVG filter in backdrop-filter is supported, use it (Chromium only) */
 @supports (backdrop-filter: url(#frost-low)) {
        .trans-low:before { backdrop-filter: url(#frost-low); }
 }

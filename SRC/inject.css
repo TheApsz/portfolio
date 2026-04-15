@@ -1,2 +1,6 @@
+@import "CSS/main.css";
+
+@import "CSS/navbar.css";
 @import "CSS/hero.css";
-@import "CSS/section.css";
+@import "CSS/about.css";
+@import "CSS/work.css";
