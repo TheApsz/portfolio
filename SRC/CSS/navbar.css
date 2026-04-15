@@ -1,0 +1,60 @@
+#navbar {
+    position: fixed;
+    top: 10px;
+    background: transparent;
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    z-index: 100;
+
+    .navbarIndicator {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: transparent;
+        
+        h2 {
+            font-size: 22px;
+            
+            &.changeout {
+                animation: changeOut 0.2s ease;
+            }
+            &.changein {
+                animation: changein 0.2s ease;
+            }
+        }
+    }
+
+    h1 {
+        color: var(--pri);
+        font-size: 22px;
+    }
+}
+
+@keyframes changein {
+    from {
+        translate: 0% 100%;
+        opacity: 0;
+    }
+    to {
+        translate: 0% 0%;
+        opacity: 1;
+    }
+}
+@keyframes changeOut {
+    from {
+        translate: 0% 0%;
+        opacity: 1;
+    }
+    to {
+        translate: 0% -100%;
+        opacity: 0;
+    }
+}
