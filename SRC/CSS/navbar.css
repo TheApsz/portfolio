@@ -24,10 +24,10 @@
             font-size: 22px;
             
             &.changeout {
-                animation: changeOut 0.2s ease;
+                animation: changeOut 0.3s ease;
             }
             &.changein {
-                animation: changein 0.2s ease;
+                animation: changein 0.3s ease;
             }
         }
     }

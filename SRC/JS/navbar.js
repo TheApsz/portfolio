@@ -1,22 +1,36 @@
 $(function() {
     const $indicator = $('.navbarIndicatorText');
-    const sections = $('[data-section]');
-    let currentLabel = null;
-    let queue = [];
+    const $sections = $('[data-section]');
+    let currentLabel = $indicator.text().trim();
     let isAnimating = false;
 
-    function processQueue() {
-        if (isAnimating || queue.length === 0) return;
-
-        const next = queue.shift();
-        if (next === currentLabel) {
-            processQueue();
+    function updateSection() {
+        if (window.scrollY <= 50) {
+            if (currentLabel !== '001 / HERO' && !isAnimating) {
+                triggerAnimation('001 / HERO');
+            }
             return;
         }
 
+        const viewportCenter = window.innerHeight / 2;
+        let foundLabel = null;
+        $sections.each(function() {
+            const rect = this.getBoundingClientRect();
+            
+            if (viewportCenter >= rect.top && viewportCenter <= rect.bottom) {
+                foundLabel = $(this).data('section');
+                return false;
+            }
+        });
+        if (foundLabel && foundLabel !== currentLabel && !isAnimating) {
+            triggerAnimation(foundLabel);
+        }
+    }
+
+    function triggerAnimation(next) {
+        console.log("Switching to:", next);
         isAnimating = true;
         currentLabel = next;
-
         $indicator.addClass('changeout');
         setTimeout(() => {
             $indicator.text(next);
@@ -24,22 +38,12 @@ $(function() {
             setTimeout(() => {
                 $indicator.removeClass('changein');
                 isAnimating = false;
-                processQueue();
+                
+                updateSection();
             }, 200);
         }, 200);
     }
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const label = $(entry.target).data('section');
-                queue.push(label);
-                processQueue();
-            }
-        });
-    }, { threshold: 1 });
-
-    sections.each(function() {
-        observer.observe(this);
-    });
+    window.addEventListener('scroll', updateSection, { passive: true });
+    updateSection();
 });
