@@ -3,565 +3,705 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Faustas - J. W. Goethe</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<title>Faustas — J. W. Goethe</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0f; }
 
-  :root {
-    --bg: #c2c2c2;
-    --surface: rgba(255,255,255,0.04);
-    --surface-hover: rgba(255,255,255,0.07);
-    --border: rgba(255,255,255,0.09);
-    --border-active: rgba(200,180,255,0.4);
-    --text-primary: rgba(255,255,255,0.92);
-    --text-secondary: rgba(255,255,255,0.45);
-    --text-muted: rgba(255,255,255,0.22);
-    --accent: #b8a0f8;
-    --accent-dim: rgba(184,160,248,0.15);
-    --gold: #d4a94a;
-    --gold-dim: rgba(212,169,74,0.12);
-    --teal: #5ecfb0;
-  }
+/* ───────────── CANVAS ───────────── */
+#bgCanvas {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none;
+}
 
-  html, body {
-    width: 100%; height: 100%;
-    background: var(--bg);
-    color: var(--text-primary);
-    font-family: 'DM Mono', monospace;
-    overflow: hidden;
-  }
+/* ───────────── SLIDE WRAPPER ───────────── */
+#slideWrap {
+  position: fixed; inset: 0; z-index: 1;
+}
 
-  canvas#bg {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
+/* ───────────── SLIDE ───────────── */
+.slide {
+  position: absolute; inset: 0;
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.55s ease;
+}
+.slide.active {
+  opacity: 1;
+  pointer-events: all;
+}
 
-  #app {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    padding: 24px;
-  }
+/* Layout: image left, content right */
+.slide-img-col {
+  flex: 0 0 42%;
+  position: relative;
+  overflow: hidden;
+}
+.slide-img-col img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: sepia(0.15) brightness(0.85);
+  transition: transform 8s ease;
+}
+.slide.active .slide-img-col img { transform: scale(1.04); }
+.slide-img-col::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, transparent 55%, #0a0a0f 100%),
+              linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 25%);
+}
 
-  /* -- SLIDE CARD -- */
-  #slide-card {
-    width: 100%;
-    max-width: 760px;
-    min-height: 400px;
-    background: rgba(13,13,20,0.72);
-    border: 0.5px solid var(--border);
-    border-radius: 20px;
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
-    padding: 48px 52px 40px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    transition: opacity 0.25s ease;
-  }
+.slide-text-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 72px 64px 96px 52px;
+  position: relative;
+  overflow-y: auto;
+}
 
-  #slide-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent-dim), var(--border-active), var(--accent-dim), transparent);
-  }
+/* Title slide */
+.slide.title-slide .slide-img-col { flex: 0 0 52%; }
+.slide.title-slide .slide-text-col {
+  justify-content: flex-end;
+  padding-bottom: 110px;
+}
 
-  .slide-tag {
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    color: var(--accent);
-    text-transform: uppercase;
-    font-family: 'DM Mono', monospace;
-  }
+/* centre layout: no image, full width */
+.slide.centre .slide-img-col { display: none; }
+.slide.centre .slide-text-col {
+  align-items: center;
+  text-align: center;
+  padding: 80px 140px 100px;
+  flex: 1;
+}
+.slide.centre .body ul { text-align: left; }
+.slide.centre .body-grid { text-align: left; }
 
-  .slide-num {
-    position: absolute;
-    top: 40px; right: 48px;
-    font-size: 11px;
-    color: var(--text-muted);
-    letter-spacing: 0.1em;
-  }
+/* ───────────── TYPOGRAPHY ───────────── */
+.tag {
+  display: inline-block;
+  font-family: 'Lora', serif;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #c5a46a;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(197,164,106,0.3);
+}
 
-  .slide-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 42px;
-    font-weight: 300;
-    line-height: 1.15;
-    color: var(--text-primary);
-    letter-spacing: -0.01em;
-  }
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(34px, 4.2vw, 60px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: rgba(255,255,255,0.96);
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+h1 em { font-style: italic; color: #d4aa6a; }
 
-  .slide-subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    font-style: italic;
-    color: var(--gold);
-    font-weight: 300;
-  }
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 3.2vw, 44px);
+  font-weight: 400;
+  line-height: 1.15;
+  color: rgba(255,255,255,0.93);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+h2 em { font-style: italic; color: #d4aa6a; }
 
-  .slide-divider {
-    width: 40px;
-    height: 1px;
-    background: var(--border-active);
-    opacity: 0.5;
-    margin: 4px 0;
-  }
+.subtitle {
+  font-family: 'Lora', serif;
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 26px;
+}
 
-  .slide-body {
-    font-size: 13px;
-    line-height: 1.8;
-    color: rgba(255,255,255,0.68);
-    font-weight: 300;
-  }
+.divider {
+  width: 36px; height: 1px;
+  background: rgba(197,164,106,0.5);
+  margin-bottom: 26px;
+}
 
-  .slide-body ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
+.body {
+  font-family: 'Lora', serif;
+  font-size: 14.5px;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.68);
+}
+.body ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.body ul li { padding-left: 20px; position: relative; }
+.body ul li::before { content: '—'; position: absolute; left: 0; color: #c5a46a; }
+.body strong { color: rgba(255,255,255,0.88); font-weight: 500; }
+.body .a1 { color: #c5a46a; }
+.body .a2 { color: #7ecfb0; }
+.body .a3 { color: #9ab8e0; }
 
-  .slide-body ul li {
-    padding-left: 18px;
-    position: relative;
-  }
+blockquote.fancy {
+  border-left: 2px solid rgba(197,164,106,0.45);
+  padding: 13px 18px;
+  background: rgba(197,164,106,0.05);
+  border-radius: 0 6px 6px 0;
+  margin: 12px 0;
+}
+blockquote.fancy p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.5;
+}
+blockquote.fancy small {
+  display: block; margin-top: 7px;
+  font-family: 'Lora', serif; font-size: 11px;
+  color: rgba(255,255,255,0.32); letter-spacing: 0.07em;
+}
 
-  .slide-body ul li::before {
-    content: '·';
-    position: absolute;
-    left: 4px;
-    color: var(--accent);
-    font-size: 16px;
-    line-height: 1.5;
-  }
+.body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 24px;
+}
 
-  .slide-body .name { color: var(--accent); }
-  .slide-body .name-gold { color: var(--gold); }
-  .slide-body .name-teal { color: var(--teal); }
+.slide-num {
+  position: absolute; bottom: 30px; right: 46px;
+  font-family: 'Lora', serif; font-size: 11px;
+  letter-spacing: 0.15em; color: rgba(255,255,255,0.18);
+}
 
-  .slide-body blockquote {
-    border-left: 2px solid var(--accent-dim);
-    padding: 10px 16px;
-    background: rgba(184,160,248,0.04);
-    border-radius: 0 8px 8px 0;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 17px;
-    color: rgba(255,255,255,0.6);
-    margin: 8px 0;
-  }
+.img-credit {
+  position: absolute; bottom: 8px; left: 8px;
+  font-family: 'Lora', serif; font-size: 9px;
+  color: rgba(255,255,255,0.22); z-index: 2;
+  letter-spacing: 0.04em;
+}
 
-  /* fade transition */
-  #slide-card.fading { opacity: 0; transform: translateY(6px); }
-  #slide-card { transition: opacity 0.2s ease, transform 0.2s ease; }
+/* ───────────── TOP PROGRESS BAR ───────────── */
+#topBar {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 2px; z-index: 200;
+  background: rgba(255,255,255,0.05);
+}
+#topFill {
+  height: 100%;
+  background: linear-gradient(90deg, #c5a46a, #e0c07a);
+  transition: width 0.4s ease;
+}
 
-  /* -- ISLAND PANEL -- */
-  #island {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(255,255,255,0.05);
-    border: 0.5px solid var(--border);
-    border-radius: 999px;
-    padding: 8px 14px;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 0.5px rgba(255,255,255,0.04);
-    max-width: 760px;
-    width: 100%;
-    overflow: hidden;
-  }
+/* ───────────── ISLAND PANEL ───────────── */
+#island {
+  position: fixed;
+  bottom: 26px; left: 50%; transform: translateX(-50%);
+  z-index: 100;
+  display: flex; align-items: center; gap: 0;
+  background: rgba(8,8,12,0.88);
+  border: 0.5px solid rgba(255,255,255,0.13);
+  border-radius: 999px;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  box-shadow: 0 12px 48px rgba(0,0,0,0.65), 0 0 0 0.5px rgba(255,255,255,0.04) inset;
+  height: 46px;
+  user-select: none;
+  overflow: hidden;
+}
 
-  #island-dots {
-    display: flex;
-    gap: 5px;
-    flex: 1;
-    flex-wrap: wrap;
-    align-items: center;
-  }
+.i-btn {
+  background: none; border: none;
+  color: rgba(255,255,255,0.5);
+  font-family: 'Lora', serif; font-size: 13px;
+  cursor: pointer; padding: 0 22px; height: 100%;
+  transition: color 0.15s, background 0.15s;
+  white-space: nowrap; display: flex; align-items: center;
+}
+.i-btn:hover { color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.07); }
+.i-btn:active { background: rgba(255,255,255,0.12); }
 
-  .dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--text-muted);
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-    flex-shrink: 0;
-  }
-  .dot:hover { background: var(--text-secondary); transform: scale(1.3); }
-  .dot.active { background: var(--accent); transform: scale(1.2); }
+.i-sep { width: 1px; height: 22px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
 
-  .island-sep {
-    width: 1px;
-    height: 22px;
-    background: var(--border);
-    flex-shrink: 0;
-  }
+#islandDots {
+  display: flex; align-items: center; gap: 5px;
+  padding: 0 16px;
+}
+.dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: none; cursor: pointer;
+  transition: background 0.2s, transform 0.15s, width 0.25s;
+  flex-shrink: 0;
+}
+.dot:hover { background: rgba(255,255,255,0.5); transform: scale(1.3); }
+.dot.active { background: #c5a46a; width: 20px; border-radius: 3px; }
 
-  .island-btn {
-    background: none;
-    border: 0.5px solid var(--border);
-    border-radius: 999px;
-    color: var(--text-secondary);
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    cursor: pointer;
-    padding: 5px 14px;
-    transition: background 0.15s, color 0.15s, border-color 0.15s;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .island-btn:hover {
-    background: var(--surface-hover);
-    color: var(--text-primary);
-    border-color: var(--border-active);
-  }
-  .island-btn:active { transform: scale(0.97); }
+#islandCounter {
+  font-family: 'Lora', serif; font-size: 11px;
+  color: rgba(255,255,255,0.28);
+  padding: 0 16px; white-space: nowrap; letter-spacing: 0.1em;
+}
 
-  #island-counter {
-    font-size: 10px;
-    color: var(--text-muted);
-    letter-spacing: 0.08em;
-    white-space: nowrap;
-    flex-shrink: 0;
-    min-width: 36px;
-    text-align: center;
-  }
-
-  /* keyboard hint */
-  #hint {
-    font-size: 10px;
-    color: var(--text-muted);
-    letter-spacing: 0.08em;
-  }
+#kbdHint {
+  position: fixed; bottom: 8px; right: 18px;
+  font-family: 'Lora', serif; font-size: 10px;
+  color: rgba(255,255,255,0.16); letter-spacing: 0.1em; z-index: 99;
+}
 </style>
 </head>
 <body>
 
-<canvas id="bg"></canvas>
+<canvas id="bgCanvas"></canvas>
+<div id="topBar"><div id="topFill"></div></div>
 
-<div id="app">
-  <div id="slide-card">
-    <span class="slide-tag" id="s-tag">Įvadas</span>
-    <span class="slide-num" id="s-num">01 / 13</span>
-    <h1 class="slide-title" id="s-title">Johanas Volfgangas fon Gėtė</h1>
-    <div class="slide-subtitle" id="s-sub">„Faustas" - epochos šedevras</div>
-    <div class="slide-divider"></div>
-    <div class="slide-body" id="s-body"></div>
+<div id="slideWrap">
+
+  <!-- 01 · TITLE -->
+  <div class="slide title-slide active" data-i="0">
+    <div class="slide-img-col">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Goethe_%28Stieler_1828%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original" alt="Goethe portretas">
+      <span class="img-credit">J. K. Stieler, „Goethe", 1828 · Public Domain</span>
+    </div>
+    <div class="slide-text-col">
+      <div class="tag">Literatūros pamoka</div>
+      <h1>Johanas Volfgangas<br><em>fon Gėtė</em></h1>
+      <div class="subtitle">ir jo amžinasis „Faustas"</div>
+      <div class="divider"></div>
+      <div class="body"><p>Didžiausias vokiečių literatūros kūrinys —<br>60 metų rašyta gyvenimo filosofija.</p></div>
+      <div class="slide-num">01 / 13</div>
+    </div>
   </div>
 
-  <div id="island">
-    <button class="island-btn" id="btn-prev">← atgal</button>
-    <div class="island-sep"></div>
-    <div id="island-dots"></div>
-    <div class="island-sep"></div>
-    <span id="island-counter">1 / 13</span>
-    <div class="island-sep"></div>
-    <button class="island-btn" id="btn-next">pirmyn →</button>
+  <!-- 02 · BIOGRAFIJA -->
+  <div class="slide" data-i="1">
+    <div class="slide-img-col">
+      <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.britannica.com%2F28%2F147428-050-79DB86F4%2Fengraving-Johann-Wolfgang-von-Goethe-James-Posselwhite.jpg&f=1&nofb=1&ipt=49f2732a59609f2b52202fd88120f537af705cf8a61255970d04d5fc3a4d25b4" alt="Goethe Romoje">
+      <span class="img-credit">J. H. W. Tischbein, „Gete Romoje", 1787 · Public Domain</span>
+    </div>
+    <div class="slide-text-col">
+      <div class="tag">Biografija</div>
+      <h2>Kas buvo Gėtė?</h2>
+      <div class="subtitle">1749–1832 m. · Frankfurtas</div>
+      <div class="divider"></div>
+      <div class="body"><ul>
+        <li>Gimė 1749 m. rugpjūčio 28 d. Frankfurte prie Maino</li>
+        <li>Poetas, dramaturgas, romanistas ir mokslininkas</li>
+        <li>Studijavo teisę, domėjosi gamtotyra ir alchemija</li>
+        <li>Ilgai dirbo Veimaro kunigaikštystėje, epochos kultūros centre</li>
+        <li>„Faustą" pats vadino didžiausiu savo gyvenimo darbu</li>
+      </ul></div>
+      <div class="slide-num">02 / 13</div>
+    </div>
   </div>
 
-  <span id="hint">← → klavišai arba mygtukai</span>
+  <!-- 03 · KURYBOS ISTORIJA -->
+  <div class="slide" data-i="2">
+    <div class="slide-img-col">
+      <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.pixabay.com%2Fphoto%2F2018%2F08%2F07%2F10%2F43%2Fschiller-3589567_1280.jpg&f=1&nofb=1&ipt=89445e7532adb852ee1dcd47f1013a3ae9ac132f127942691388f3001f01fb20">
+      <span class="img-credit">Gete ir Schiller paminklas, Weimar · Public Domain</span>
+    </div>
+    <div class="slide-text-col">
+      <div class="tag">Kūrybos istorija</div>
+      <h2>60 metų kelias</h2>
+      <div class="subtitle">Kaip gimė „Faustas"</div>
+      <div class="divider"></div>
+      <div class="body"><ul>
+        <li><strong>~1772 m.</strong> — pirmosios idėjos, Gėtei vos 23 metai</li>
+        <li><strong>1772–1775 m.</strong> — „Urfaust" (pradinė forma, nebuvo skelbta)</li>
+        <li><strong>1790 m.</strong> — „Faustas. Fragmentas" — pirmoji publikacija</li>
+        <li><strong>1808 m.</strong> — „Faustas I dalis" — pilna pirmosios dalies leidimas</li>
+        <li><strong>1832 m.</strong> — „Faustas II dalis" — išleista po autoriaus mirties</li>
+      </ul></div>
+      <div class="slide-num">03 / 13</div>
+    </div>
+  </div>
+
+  <!-- 04 · ISTORINIS MITAS -->
+  <div class="slide" data-i="3">
+    <div class="slide-img-col">
+      <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcollectionapi.metmuseum.org%2Fapi%2Fcollection%2Fv1%2Fiiif%2F371738%2F765041%2Fmain-image&f=1&nofb=1&ipt=da0216d1f1ef4e7cb2f9ea2894b4ad1812ea71c022b0a0f6c857e00e1cd5bf9a" alt="Rembrandt Faustas 1652">
+      <span class="img-credit">Rembrandt van Rijn, „Faustas", 1652 · Public Domain</span>
+    </div>
+    <div class="slide-text-col">
+      <div class="tag">Šaltiniai</div>
+      <h2>Istorinis Fausto mitas</h2>
+      <div class="subtitle">Legendos šaknys</div>
+      <div class="divider"></div>
+      <div class="body"><ul>
+        <li>Istorinis Johannas Faustusas — XVI a. vokiečių alchemikas</li>
+        <li><strong>1587 m.</strong> — pirmoji knyga: „Historia von D. Johann Fausten"</li>
+        <li><strong>1592 m.</strong> — Christoferio Marlove drama „Daktaras Faustas"</li>
+        <li>Gėtė legendą pavertė universalia žmogiškąja filosofija</li>
+      </ul></div>
+      <div class="slide-num">04 / 13</div>
+    </div>
+  </div>
+
+  <!-- 05 · SIUZETAS I -->
+  <div class="slide" data-i="4">
+    <div class="slide-img-col">
+      <img src="https://c8.alamy.com/comp/2PGFJAH/faust-and-mephistopheles-on-the-blocksberg-1826-by-eugene-delacroix-2PGFJAH.jpg" alt="Mefistofelis pasirodo Faustui">
+      <span class="img-credit">E. Delacroix, „Mefistofelis", 1826–27 · Public Domain</span>
+    </div>
+    <div class="slide-text-col">
+      <div class="tag">Siužetas · I dalis</div>
+      <h2>Sutartis su velniu</h2>
+      <div class="subtitle">Faustas I · 1808 m.</div>
+      <div class="divider"></div>
+      <div class="body"><ul>
+        <li>Faustas — nusivylęs mokslininkas, jaučia žinių ribų skausmą</li>
+        <li>Mefistofelis pasirodo kaip juodas šuo, vėliau — elegantiškas ponas</li>
+        <li>Sutartis: Mefistofelis tarnauja, kol Faustas sušuks „sustok, akimirka!"</li>
+        <li>Faustas atjaunėja per magiją ir įsimyli nekaltą Margaritą (Gretchen)</li>
+        <li>Tragedija: Margaritos brolis nužudomas, ji ikalinama ir miršta</li>
+        <li>Gretchen išgelbėjamas — nors Faustas pabėga su Mefistofeliu</li>
+      </ul></div>
+      <div class="slide-num">05 / 13</div>
+    </div>
+  </div>
+
+  <!-- 06 · SIUZETAS II -->
+  <div class="slide" data-i="5">
+    <div class="slide-img-col">
+      <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F2.bp.blogspot.com%2F-jYVocXubReo%2FVGNv9c0v0II%2FAAAAAAAAB8M%2FQeVC1zevq7s%2Fs1600%2Fcaspar_david_friedrich_squared_5.jpg&f=1&nofb=1&ipt=e7dc783868e3835d42abd0622dda1640911a4747a3f7fe211b8f88270bd0b465" alt="Caspar David Friedrich keleivis">
+      <span class="img-credit">C. D. Friedrich, „Keleivis virš rūkų", 1818 · Public Domain</span>
+    </div>
+    <div class="slide-text-col">
+      <div class="tag">Siužetas · II dalis</div>
+      <h2>Pasaulio scenoje</h2>
+      <div class="subtitle">Faustas II · 1832 m.</div>
+      <div class="divider"></div>
+      <div class="body"><ul>
+        <li>Faustas pabunda gamtoje — atgimsta ir apsivalo nuo kaltės</li>
+        <li>Imperatoriaus dvare — su Mefistofeliu vaidina finansinius triukus</li>
+        <li>Keliauja į antiką, pamilsta Helena iš Trojos — grožio ir idealumo simbolį</li>
+        <li>Jų sūnus Euforionas — poezijos dvasia — tragiškai žūsta</li>
+        <li>Senas Faustas siekia melioruoti jūros pakrantę — žmonių gerovei</li>
+        <li>Mirtis — ir išganymas per Margaretės meilę bei Dievo malonę</li>
+      </ul></div>
+      <div class="slide-num">06 / 13</div>
+    </div>
+  </div>
+
+  <!-- 07 · PERSONAZAI -->
+  <div class="slide" data-i="6">
+    <div class="slide-img-col">
+      <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.meisterdrucke.ie%2Fkunstwerke%2F1260px%2FUnknown_artist_-_Mephistopheles_(Mephisto)_a_Faust_Illustration_de_Faust_by_Johann_Wolfgang_von_-_(MeisterDrucke-1005453).jpg&f=1&nofb=1&ipt=fde7e555a028b62d1975c244c3aa80e5589402d4f117417395ac51ddbc419825" alt="Faustas ir Mefistofelis">
+      <span class="img-credit">H. Delaroche, „Faustas ir Mefistofelis", 1840 · Public Domain</span>
+    </div>
+    <div class="slide-text-col">
+      <div class="tag">Personažai</div>
+      <h2>Pagrindiniai veikėjai</h2>
+      <div class="subtitle">Kas yra kas?</div>
+      <div class="divider"></div>
+      <div class="body"><ul>
+        <li><span class="a1">Faustas</span> — mokslininkas, amžinas ieškotojas, visos žmonijos simbolis</li>
+        <li><span class="a2">Mefistofelis</span> — velnias, nihilistas; nori blogio</li>
+        <li><span class="a3">Margarita (Gretchen)</span> — tyra, naivi mergina; tragiška aukos figūra</li>
+        <li><span class="a1">Helena</span> — antikos grožio ir idealumo įsikūnijimas (II dalis)</li>
+        <li>Viešpats — prologe lažinasi su Mefistofeliu dėl Fausto sielos</li>
+        <li>Vagneris — Fausto asistentas, protas be dvasios simbolis</li>
+      </ul></div>
+      <div class="slide-num">07 / 13</div>
+    </div>
+  </div>
+
+  <!-- 08 · FILOSOFIJA -->
+  <div class="slide centre" data-i="7">
+    <div class="slide-text-col">
+      <div class="tag">Filosofija</div>
+      <h2>Pagrindinės idėjos</h2>
+      <div class="subtitle">Kuo svarbus šis kūrinys?</div>
+      <div class="divider"></div>
+      <div class="body">
+        <blockquote class="fancy">
+          <p>„Eina per klaidą, kas siekia aukštyn"</p>
+          <small>— Viešpats, Prologas Danguje</small>
+        </blockquote>
+        <ul style="margin-top:18px">
+          <li>Žmogaus pažinimo troškimas — amžinoji ir neišsprendžiama drama</li>
+          <li>Gėris ir blogis — neatsiejamos to paties pasaulio dalys</li>
+          <li>Mefistofelio paradoksas: jėga, kuri nori blogio ir neišvengiamai daro gėrį</li>
+          <li>Išganymas per meilę, pastangas ir nuolatinį judėjimą pirmyn</li>
+        </ul>
+      </div>
+      <div class="slide-num">08 / 13</div>
+    </div>
+  </div>
+
+  <!-- 09 · SIMBOLIKA -->
+  <div class="slide" data-i="8">
+    <div class="slide-img-col">
+      <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F2.bp.blogspot.com%2F-muUqZbKCTDg%2FVUKz7r3Q_MI%2FAAAAAAAAEbc%2FoBjPijFuFM4%2Fs1600%2Fpc23.jpg&f=1&nofb=1&ipt=e0210b50c8a14cb78854cb63f5ebfecd59a334e0c7ac8af764e4578ded4e9d59" alt="Valpurgijos naktis">
+      <span class="img-credit">L. R. Falero, „Valpurgijos naktis", 1878 · Public Domain</span>
+    </div>
+    <div class="slide-text-col">
+      <div class="tag">Simbolika</div>
+      <h2>Svarbiausi simboliai</h2>
+      <div class="subtitle">Gilesnė prasmė</div>
+      <div class="divider"></div>
+      <div class="body"><ul>
+        <li><strong>Sutartis krauju</strong> — sielos ir kūno konfliktas, lemties pasirinkimas</li>
+        <li><strong>Juodas šuo</strong> — blogybė, slypinti paprastiausiame pavidale</li>
+        <li><strong>Amžinoji moters figūra</strong> — dangaus malonė, išganymo kelias</li>
+        <li><strong>Homunkulas</strong> — dirbtinio gyvybės kūrimo svajonė ir proto ribos</li>
+        <li><strong>Valpurgijos naktis</strong> — chaosas, laisvė nuo normų, pasąmonės simbolis</li>
+        <li><strong>Jūros sausinimas</strong> — žmogaus ambicija pakeisti pasaulį</li>
+      </ul></div>
+      <div class="slide-num">09 / 13</div>
+    </div>
+  </div>
+
+  <!-- 10 · STILIUS -->
+  <div class="slide centre" data-i="9">
+    <div class="slide-text-col">
+      <div class="tag">Literatūrinė forma</div>
+      <h2>Kaip tai parašyta?</h2>
+      <div class="subtitle">Stilius ir struktūra</div>
+      <div class="divider"></div>
+      <div class="body body-grid">
+        <ul>
+          <li>Drama, lyrika ir epas viename</li>
+          <li>Madrigaliniai eilėraščiai ir sonetai</li>
+          <li>Knittelvers — liaudiškas metras</li>
+          <li>Prologas danguje — barokinis stilius</li>
+        </ul>
+        <ul>
+          <li>Graikų tragedijos tradicija II dalyje</li>
+          <li>Antikos ir krikščionybės sintezė</li>
+          <li>Folkloro ir mitologijos elementai</li>
+          <li>Allegoriška, daugiasluoksnė struktūra</li>
+        </ul>
+      </div>
+      <div class="slide-num">10 / 13</div>
+    </div>
+  </div>
+
+  <!-- 11 · EPOCHA -->
+  <div class="slide" data-i="10">
+    <div class="slide-img-col">
+      <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fuploads3.wikiart.org%2Fimages%2Fcaspar-david-friedrich%2Fwc-caspar-david-friedrich-das-eismeer.jpg&f=1&nofb=1&ipt=52983baacff1b3dfc4134d15ca7d4f84351447d3bd5540c815c1690aea893166" alt="Romantikas Caspar David Friedrich">
+      <span class="img-credit">C. D. Friedrich, „Ledų jūra", 1823–24 · Public Domain</span>
+    </div>
+    <div class="slide-text-col">
+      <div class="tag">Epocha</div>
+      <h2>Romantizmas ir <em>Sturm und Drang</em></h2>
+      <div class="subtitle">Istorinis kontekstas</div>
+      <div class="divider"></div>
+      <div class="body"><ul>
+        <li>„Audra ir veržimasis" — XVIII a. revoliucinis vokiečių literatūros judėjimas</li>
+        <li>Jausmų, gamtos ir ryškios individualybės kultas</li>
+        <li>Reakcija prieš sausą Apšvietos racionalizmą</li>
+        <li>Gėtė vėliau perėjo prie klasicizmo — „Faustas" apima abu laikotarpius</li>
+        <li>Kūrinys tapo romantizmo ir klasicizmo sinteze visoje Europoje</li>
+      </ul></div>
+      <div class="slide-num">11 / 13</div>
+    </div>
+  </div>
+
+  <!-- 12 · ITAKA -->
+  <div class="slide" data-i="11">
+    <div class="slide-img-col">
+      <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.meisterdrucke.uk%2Fkunstwerke%2F1260px%2FNadar_(1820_1910)_-_Portrait_of_Hector_Berlioz_musician_1803-1869_(photo)_-_(MeisterDrucke-1040751).jpg&f=1&nofb=1&ipt=3f2886337a510c431c7ce1e7de41097ffe169149fd40bc32b7bc8916e0d147c2" alt="Hector Berlioz">
+      <span class="img-credit">Hector Berliozas (nuotr. Nadar, 1863) · Public Domain</span>
+    </div>
+    <div class="slide-text-col">
+      <div class="tag">Kultūrinė įtaka</div>
+      <h2>„Faustas" pasaulio kultūroje</h2>
+      <div class="subtitle">Nuo 1808 m. iki šiandien</div>
+      <div class="divider"></div>
+      <div class="body"><ul>
+        <li><strong>Muzika:</strong> Berliozas, Gounod, Lisztas, Mahleris sukūrė kūrinius pagal Faustą</li>
+        <li><strong>Teatras:</strong> šimtai scenos adaptacijų visame pasaulyje — statomos iki šiol</li>
+        <li><strong>Sąvoka:</strong> „Faustiškas sandoris" — bendra kultūrinė frazė</li>
+        <li><strong>Kinas:</strong> daugybė filmų nuo 1926 m. Murnau ekranizacijos iki šiandien</li>
+      </ul></div>
+      <div class="slide-num">12 / 13</div>
+    </div>
+  </div>
+
+  <!-- 13 · PABAIGA -->
+  <div class="slide centre" data-i="12">
+    <div class="slide-text-col">
+      <div class="tag">Pabaiga</div>
+      <h2>Kodėl skaityti <em>„Faustą"</em>?</h2>
+      <div class="subtitle">Baigiamoji mintis</div>
+      <div class="divider"></div>
+      <div class="body">
+        <blockquote class="fancy">
+          <p>„Dvi sielos, deja, gyvena mano krūtinėje"</p>
+          <small>— Faustas, I dalis · „Zwei Seelen wohnen, ach! in meiner Brust"</small>
+        </blockquote>
+        <blockquote class="fancy" style="margin-top:12px">
+          <p>„Kas visad siekia aukštyn ir veržiasi, tą mes galim išgelbėt."</p>
+          <small>— Viešpats, II dalis</small>
+        </blockquote>
+        <ul style="margin-top:16px">
+          <li>Universalus klausimas apie žmogaus sielą ir jos vertę</li>
+          <li>Kūrinys aprėpia visą žmogaus patirtį — meilę, žinią, mirtį</li>
+          <li>„Faustas" — ne tik drama, bet gyvenimo filosofija</li>
+        </ul>
+      </div>
+      <div class="slide-num">13 / 13</div>
+    </div>
+  </div>
+
+</div><!-- /slideWrap -->
+
+<!-- ISLAND PANEL -->
+<div id="island">
+  <button class="i-btn" id="btnPrev">← atgal</button>
+  <div class="i-sep"></div>
+  <div id="islandDots"></div>
+  <div class="i-sep"></div>
+  <div id="islandCounter">1 / 13</div>
+  <div class="i-sep"></div>
+  <button class="i-btn" id="btnNext">pirmyn →</button>
 </div>
 
+<div id="kbdHint">← → arba tarpas</div>
+
 <script>
-$(function() {
+$(function () {
 
-  // -- CANVAS BACKGROUND --
-  const canvas = document.getElementById('bg');
-  const ctx = canvas.getContext('2d');
-  let W, H, particles = [], stars = [];
+  /* ══════ CANVAS BG ══════ */
+  const canvas = document.getElementById('bgCanvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H, blobs = [], stars = [], t = 0;
 
-  function resize() {
-    W = canvas.width = window.innerWidth;
+  function resize () {
+    W = canvas.width  = window.innerWidth;
     H = canvas.height = window.innerHeight;
   }
 
-  function initStars() {
+  function makeBlobs () {
+    blobs = [];
+    const pal = [
+      { h:38,  s:55, l:42 },
+      { h:260, s:40, l:35 },
+      { h:165, s:45, l:30 },
+      { h:20,  s:50, l:28 }
+    ];
+    for (let i = 0; i < 14; i++) {
+      const c = pal[Math.floor(Math.random() * pal.length)];
+      blobs.push({
+        x: Math.random()*W, y: Math.random()*H,
+        r: Math.random()*260+80,
+        dx: (Math.random()-.5)*.13, dy: (Math.random()-.5)*.09,
+        h: c.h, s: c.s, l: c.l,
+        a: Math.random()*.052+.016,
+        phase: Math.random()*Math.PI*2
+      });
+    }
+  }
+
+  function makeStars () {
     stars = [];
-    for (let i = 0; i < 120; i++) {
+    for (let i = 0; i < 180; i++) {
       stars.push({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        r: Math.random() * 0.9 + 0.2,
-        a: Math.random(),
-        speed: Math.random() * 0.003 + 0.001,
-        phase: Math.random() * Math.PI * 2
+        x: Math.random()*W, y: Math.random()*H,
+        r: Math.random()*.8+.15,
+        a: Math.random()*.65+.1,
+        spd: Math.random()*.6+.2,
+        ph: Math.random()*Math.PI*2
       });
     }
   }
 
-  function initParticles() {
-    particles = [];
-    for (let i = 0; i < 18; i++) {
-      particles.push({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        r: Math.random() * 120 + 40,
-        dx: (Math.random() - 0.5) * 0.18,
-        dy: (Math.random() - 0.5) * 0.12,
-        hue: Math.random() > 0.5 ? 265 : 45,
-        a: Math.random() * 0.06 + 0.02
-      });
-    }
-  }
+  function tick () {
+    t += .008;
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0a0a0f';
+    ctx.fillRect(0,0,W,H);
 
-  let t = 0;
-  function draw() {
-    t += 0.016;
-    ctx.clearRect(0, 0, W, H);
-
-    ctx.fillStyle = '#0d0d12';
-    ctx.fillRect(0, 0, W, H);
-
-    particles.forEach(p => {
-      p.x += p.dx;
-      p.y += p.dy;
-      if (p.x < -p.r) p.x = W + p.r;
-      if (p.x > W + p.r) p.x = -p.r;
-      if (p.y < -p.r) p.y = H + p.r;
-      if (p.y > H + p.r) p.y = -p.r;
-
-      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
-      grad.addColorStop(0, `hsla(${p.hue},60%,55%,${p.a})`);
-      grad.addColorStop(1, 'transparent');
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fill();
+    blobs.forEach(b => {
+      b.x += b.dx; b.y += b.dy;
+      if (b.x < -b.r) b.x = W+b.r;
+      if (b.x > W+b.r) b.x = -b.r;
+      if (b.y < -b.r) b.y = H+b.r;
+      if (b.y > H+b.r) b.y = -b.r;
+      const pulse = b.a*(0.8+0.2*Math.sin(t*.7+b.phase));
+      const g = ctx.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r);
+      g.addColorStop(0, `hsla(${b.h},${b.s}%,${b.l}%,${pulse})`);
+      g.addColorStop(1, 'transparent');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(b.x,b.y,b.r,0,Math.PI*2); ctx.fill();
     });
 
     stars.forEach(s => {
-      const alpha = s.a * (0.5 + 0.5 * Math.sin(t * s.speed * 60 + s.phase));
-      ctx.fillStyle = `rgba(255,255,255,${alpha})`;
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fill();
+      const a = s.a*(0.4+0.6*Math.sin(t*s.spd+s.ph));
+      ctx.fillStyle = `rgba(255,245,215,${a})`;
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill();
     });
 
-    const scanY = (t * 40) % (H + 4) - 2;
-    ctx.strokeStyle = 'rgba(184,160,248,0.04)';
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.moveTo(0, scanY);
-    ctx.lineTo(W, scanY);
-    ctx.stroke();
+    // vignette
+    const vig = ctx.createRadialGradient(W/2,H/2,H*.18,W/2,H/2,H*.9);
+    vig.addColorStop(0,'transparent'); vig.addColorStop(1,'rgba(0,0,0,.55)');
+    ctx.fillStyle = vig; ctx.fillRect(0,0,W,H);
 
-    requestAnimationFrame(draw);
+    requestAnimationFrame(tick);
   }
 
-  resize();
-  initStars();
-  initParticles();
-  draw();
-  $(window).on('resize', function() { resize(); initStars(); initParticles(); });
+  resize(); makeBlobs(); makeStars(); tick();
+  $(window).on('resize', function () { resize(); makeBlobs(); makeStars(); });
 
-  // -- SLIDES DATA --
-  const slides = [
-    {
-      tag: 'Įvadas', title: 'Johanas Volfgangas fon Gėtė',
-      sub: '„Faustas" - epochos šedevras',
-      body: `<ul>
-        <li>1749-1832 m. - vokiečių poetas, dramaturgas, mokslininkas</li>
-        <li>Vienas didžiausių Vokietijos literatūros genijų</li>
-        <li>„Faustas" - jo svarbiausias ir ilgiausias kūrinys</li>
-        <li>Kūrinys rašytas daugiau nei 60 metų</li>
-      </ul>`
-    },
-    {
-      tag: 'Kūrybos istorija', title: 'Kaip gimė „Faustas"?',
-      sub: '60 metų kūrybos kelias',
-      body: `<ul>
-        <li>Pirmosios idėjos - apie 1772 m. (Gėtei 23 metai)</li>
-        <li>„Pradinė Fausto forma" (Urfaust) - 1772-1775 m.</li>
-        <li>„Faustas. Fragmentas" - 1790 m.</li>
-        <li>„Faustas I" - 1808 m.</li>
-        <li>„Faustas II" - 1832 m., leidžiamas po mirties</li>
-      </ul>`
-    },
-    {
-      tag: 'Šaltiniai', title: 'Istorinis Fausto mitas',
-      sub: 'Legendos šaknys',
-      body: `<ul>
-        <li>Istorinis Johannas von Gėtė Faustas - XVI a. vokiečių alchemikas</li>
-        <li>Pirmoji knyga apie Faustą - 1587 m. (Historia von D. Johann Fausten)</li>
-        <li>Christopherio Marlowe'o drama „Daktaras Faustas" - 1592 m.</li>
-        <li>Liaudies teatrų tradicija Vokietijoje</li>
-        <li>Gėtė šią legendą pakylėjo į filosofinę aukštumą</li>
-      </ul>`
-    },
-    {
-      tag: 'Siužetas I', title: 'Pirmosios dalies turinys',
-      sub: 'Sutartis su velniu',
-      body: `<ul>
-        <li>Faustas - mokslininkas, nusivylęs žmogaus žinių ribomis</li>
-        <li>Mefistofelis pasirodo kaip juodas šuo, vėliau - kaip ponas</li>
-        <li>Sutartis: Mefistofelis tarnauja, kol Faustas pasakys „O, stabtelėk, akimirksni žavingas"</li>
-        <li>Faustas atjaunėja ir įsimyli Margaritą (Gretchen)</li>
-        <li>Tragiška Gretchen istorija - kalėjimas ir mirtis</li>
-      </ul>`
-    },
-    {
-      tag: 'Siužetas II', title: 'Antrosios dalies turinys',
-      sub: 'Pasaulio scenoje',
-      body: `<ul>
-        <li>Faustas pabunda gamtoje - atgimimas ir išgydymas</li>
-        <li>Imperatoriaus dvare - Faustas sutinka Helenę iš Trojos</li>
-        <li>Simbolinė santuoka su antikos grožiu</li>
-        <li>Faustas siekia žmonių gerovės - sausinama jūros pakrantė</li>
-        <li>Fausto mirtis ir išganymas Dievo malonės dėka</li>
-      </ul>`
-    },
-    {
-      tag: 'Personažai', title: 'Pagrindiniai veikėjai',
-      sub: 'Kas yra kas?',
-      body: `<ul>
-        <li><span class="name">Faustas</span> - mokslininkas, amžinas ieškotojas, simbolizuoja žmoniją</li>
-        <li><span class="name-teal">Mefistofelis</span> - velnias, ironiškas ir gudrus</li>
-        <li><span class="name-gold">Margaretė (Gretchen)</span> - naivi, tyra mergina, tragiška aukos figūra</li>
-        <li><span class="name">Helenė</span> - antikos grožio įsikūnijimas (II dalis)</li>
-        <li>Viešpats - prologe lažinasi su Mefistofeliu dėl Fausto sielos</li>
-      </ul>`
-    },
-    {
-      tag: 'Filosofija', title: 'Pagrindinės idėjos',
-      sub: 'Kuo svarbus šis kūrinys?',
-      body: `<ul>
-        <li>Žmogaus pažinimo troškimas ir jo ribos</li>
-        <li>Gėris ir blogis - neatsiejamos pasaulio dalys</li>
-        <li>Mefistofelio paradoksas - jėga, kuri nori blogio ir daro gėrį</li>
-        <li>Žmogus turi klaidžioti, kad augtų</li>
-        <li>Išganymas per meilę ir pastangas</li>
-      </ul>`
-    },
-    {
-      tag: 'Simbolika', title: 'Svarbiausi simboliai',
-      sub: 'Gilesnė prasmė',
-      body: `<ul>
-        <li>Sutartis krauju - sielos ir kūno konfliktas</li>
-        <li>Juodas šuo - velnio pasirodymo forma, paslėpta blogybė</li>
-        <li>Amžinoji moters figūra - išganymo simbolis</li>
-        <li>Homunkulas - dirbtinio kūrimo svajonė, proto ribos</li>
-        <li>Jūros sausinimas - žmogaus pergalė prieš gamtą</li>
-      </ul>`
-    },
-    {
-      tag: 'Stilius', title: 'Literatūrinė forma',
-      sub: 'Kaip tai parašyta?',
-      body: `<ul>
-        <li>Mišri forma: drama, lyrika, epas</li>
-        <li>Skirtingi metrai: madrigalinis eilėraštis, sonetai, Knittelvers</li>
-        <li>Prologas danguje - barokinė tradicija</li>
-        <li>Valpurgijos naktis - folkloro elementai</li>
-        <li>Antikos ir krikščionybės pasaulių susiliejimas</li>
-      </ul>`
-    },
-    {
-      tag: 'Epocha', title: 'Romantizmas ir „Sturm und Drang"',
-      sub: 'Istorinis kontekstas',
-      body: `<ul>
-        <li>„Audra ir veržimasis" - XVIII a. vokiečių literatūros judėjimas</li>
-        <li>Jausmų, gamtos ir individualybės kultas</li>
-        <li>Reakcija prieš Apšvietos racionalizmą</li>
-        <li>Gėtė vėliau tapo klasicizmo atstovu</li>
-        <li>„Faustas" apima abu laikotarpius - tiltas tarp epochų</li>
-      </ul>`
-    },
-    {
-      tag: 'Įtaka', title: 'Kūrinio reikšmė pasaulio kultūrai',
-      sub: 'Kodėl tai svarbu iki šiandien?',
-      body: `<ul>
-        <li>Berliozas, Lisztas, Gounod, Mahleris - muzikos kūriniai pagal Faustą</li>
-        <li>Daugybė teatrinių adaptacijų visame pasaulyje</li>
-        <li>„Faustiško sandorio" sąvoka - kultūros dalis</li>
-        <li>Įtaka Nietzsche'i, Manui, Bulgakovui</li>
-        <li>Filmai, operos, baletai - iki XXI a.</li>
-      </ul>`
-    },
-    {
-      tag: 'Citata', title: 'Žymiausia citata',
-      sub: 'Faustas, I dalis',
-      body: `<blockquote>„Dvi sielos, deja, gyvena mano krūtinėje" <br><small style="font-size:13px;font-style:normal;color:rgba(255,255,255,0.3)">(„Zwei Seelen wohnen, ach! in meiner Brust")</small></blockquote>
-      <ul>
-        <li>Išreiškia vidinį žmogaus dvilypumą</li>
-        <li>Dvasinė ir juslinė prigimtys kovoja</li>
-        <li>Tapusi vienu žymiausių literatūros aforizmų</li>
-      </ul>`
-    },
-    {
-      tag: 'Išvados', title: 'Kodėl skaityti „Faustą"?',
-      sub: 'Pabaiga',
-      body: `<ul>
-        <li>Universalus klausimas: ko verta žmogaus siela?</li>
-        <li>Kūrinys, aprėpiantis visą žmogaus patirtį</li>
-        <li>Gėtė sukūrė naują tipą - amžiną ieškotoją</li>
-        <li>„Faustas" - ne tik drama, bet ir gyvenimo filosofija</li>
-      </ul>
-      <blockquote>„Kas visad siekia aukštyn ir veržiasi, tą mes galim išgelbėt."<br><small style="font-size:12px;font-style:normal;color:rgba(255,255,255,0.3)">- Viešpats, II dalis</small></blockquote>`
-    }
-  ];
 
-  let current = 0;
-  const total = slides.length;
+  /* ══════ SLIDES ══════ */
+  const $slides = $('.slide');
+  const total   = $slides.length;
+  let cur  = 0;
+  let busy = false;
 
-  $.each(slides, function(i) {
-    const $dot = $('<button class="dot">').attr('aria-label', 'Skaidrė ' + (i+1));
-    $dot.on('click', function() { goTo(i); });
-    $('#island-dots').append($dot);
+  // build dots
+  for (let i = 0; i < total; i++) {
+    $('<button class="dot">')
+      .attr('aria-label','Skaidrė '+(i+1))
+      .on('click', (function(idx){ return function(){ goTo(idx); }; })(i))
+      .appendTo('#islandDots');
+  }
+
+  function updateUI () {
+    $('#topFill').css('width', ((cur+1)/total*100).toFixed(1)+'%');
+    $('#islandCounter').text((cur+1)+' / '+total);
+    $('#islandDots .dot').removeClass('active').eq(cur).addClass('active');
+  }
+
+  function goTo (idx) {
+    if (busy || idx === cur || idx < 0 || idx >= total) return;
+    busy = true;
+    $slides.eq(cur).removeClass('active');
+    cur = idx;
+    $slides.eq(cur).addClass('active');
+    updateUI();
+    setTimeout(function(){ busy = false; }, 620);
+  }
+
+  $('#btnPrev').on('click', function(){ goTo(cur-1); });
+  $('#btnNext').on('click', function(){ goTo(cur+1); });
+
+  $(document).on('keydown', function(e){
+    if      (['ArrowRight','ArrowDown',' '].includes(e.key)){ e.preventDefault(); goTo(cur+1); }
+    else if (['ArrowLeft','ArrowUp'].includes(e.key))        { e.preventDefault(); goTo(cur-1); }
+    else if (e.key==='Home') goTo(0);
+    else if (e.key==='End')  goTo(total-1);
   });
 
-  function updateDots() {
-    $('#island-dots .dot').removeClass('active').eq(current).addClass('active');
-  }
+  // touch swipe
+  let tx0 = null;
+  document.addEventListener('touchstart', e=>{ tx0=e.touches[0].clientX; },{passive:true});
+  document.addEventListener('touchend',   e=>{
+    if(tx0===null) return;
+    const dx = e.changedTouches[0].clientX - tx0;
+    if(Math.abs(dx)>48){ dx<0 ? goTo(cur+1) : goTo(cur-1); }
+    tx0=null;
+  },{passive:true});
 
-  function goTo(idx, dir) {
-    if (idx === current) return;
-    current = idx;
-    const s = slides[current];
-
-    $('#slide-card').addClass('fading');
-
-    setTimeout(function() {
-      $('#s-tag').text(s.tag);
-      $('#s-num').text(String(current+1).padStart(2,'0') + ' / ' + total);
-      $('#s-title').text(s.title);
-      $('#s-sub').text(s.sub);
-      $('#s-body').html(s.body);
-      $('#island-counter').text((current+1) + ' / ' + total);
-      updateDots();
-      $('#slide-card').removeClass('fading');
-    }, 200);
-  }
-
-  function next() { goTo(current < total-1 ? current+1 : current); }
-  function prev() { goTo(current > 0 ? current-1 : current); }
-
-  $('#btn-next').on('click', next);
-  $('#btn-prev').on('click', prev);
-
-  $(document).on('keydown', function(e) {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next();
-    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prev();
-  });
-
-  const s0 = slides[0];
-  $('#s-body').html(s0.body);
-  $('#island-counter').text('1 / ' + total);
-  updateDots();
+  updateUI();
 });
 </script>
 </body>
