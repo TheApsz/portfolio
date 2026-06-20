@@ -1,0 +1,23 @@
+#background {
+    position: fixed;
+    background: black;
+    width: 100svw;
+    height: 100svh;
+    top: 0;
+    left: 0;
+    border-radius: 0;
+
+    img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        transition: var(--S1);
+    }
+
+    &.login {
+        img {
+            scale: 1.2;
+            filter: saturate(0.7);
+        }
+    }
+}
