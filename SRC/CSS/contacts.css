@@ -1,0 +1,43 @@
+#contact {
+    background: transparent;
+
+    .contactMain {
+        position: relative;
+        background: transparent;
+        height: 200px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(1, 1fr);
+        gap: 10px;
+
+        .card {
+            background: var(--bg2);
+            height: 100%;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .cardImage {
+                background: transparent;
+                aspect-ratio: 1;
+                height: 80px;
+
+                img {
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            h3 {
+                color: var(--pri);
+                font-size: 20px;
+            }
+            h2 {
+                opacity: 0.5;
+                font-size: 14px;
+            }
+        }
+    }
+}

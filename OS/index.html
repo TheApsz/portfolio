@@ -31,67 +31,91 @@
 <script type="module" src="SRC/inject.js"></script>
 <html lang="en">
 
+<body>
+    <div id="background" class="login">
+        <img alt="background" src="SRC/images/wallpaper.png">
+    </div>
 
-<body
-    data-firsttime="True"
+    <div id="startup" class="debugOff">
+        <div class="startupText">
+            <img alt="logo" src="SRC/images/logo.svg">
+            <h1>LUMEN</h1>
+        </div>
+        <div class="startupDecoration">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div id="login" class="trans-med active">
+        <div class="loginMain">
+            <div class="loginClock">
+                <h1 class="time">00:00</h1>
+                <h2 class="date">Sunday, June 14</h2>
+            </div>
 
-    >
-    <div id="main">
-        <div class="tutorial">
-            <div class="card">
-                <h1>Welcome to <span class="highlight">Lumen</span></h1>
-                <h2>Web based operating system. Need a tutorial?</h2>
-                <div class="choice">
-                    <div class="button">
-                        <h3>Yes please</h3>
+            <div class="loginList">
+                <h2 class="loginWatermark">LUMEN</h2>
+
+                <div class="loginSelect">
+                    <h3>Select user</h3>
+
+                    <div class="card button active">
+                        <div class="cardImage">
+                            <img alt="user profile" class="user" src="SRC/images/apsz.webp">
+                        </div>
+                        <div class="cardDetail">
+                            <h1>Apsz</h1>
+                            <h2>Administrator</h2>
+                        </div>
                     </div>
-                    <div class="button">
-                        <h3>Ew what the hell?</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <h2>Bellow this text we have your monitor (that big black box)</h2>
-                <div class="choice">
-                    <div class="button">
-                        <h3>mhm..</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <h2>Imagine this as your actual physical desktop or a laptop</h2>
-                <div class="choice">
-                    <div class="button">
-                        <h3>okie</h3>
+                    <div class="card button">
+                        <div class="cardImage">
+                            <img alt="user profile" src="SRC/images/user.svg">
+                        </div>
+                        <div class="cardDetail">
+                            <h1>Guest</h1>
+                            <h2>limited access</h2>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="card active">
-                <h2>First we will enter the physical mode by pressing:</h2>
-                <div class="choice">
-                    <div class="highlight keyMod_Shift">
-                        <h3>Shift</h3>
-                    </div>
-                    <h2>+</h2>
-                    <div class="highlight keyMod_Escape">
-                        <h3>Esc</h3>
+            <div class="loginList">
+                <h2 class="loginRemind">Password for <span class="loginSelectedUser">Apsz</span></h2>
+                <div class="loginType">
+                    <h3 class="loginTypePassword">Enter password here :3</h3>
+                    <input class="loginTypeBack" type="text" maxlength="888">
+                </div>
+
+                <div class="loginProceed button">
+                    <h3>Unlock</h3>
+                </div>
+
+                <div class="loginFlex">
+                    <h2 class="loginFlexCaps">Caps lock off</h2>
+                    <div class="loginFlexFlex">
+                        <div class="button">
+                            <img alt="button" src="SRC/images/restart.svg">
+                        </div>
+                        <div class="button">
+                            <img alt="button" src="SRC/images/shutdown.svg">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
 </body>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 :root {
        /* Backgrounds */
-       --bg: #0b0b0d;
+       --bg: rgb(11, 11, 13);
        --bg2: rgba(16, 16, 18, 1);
        --bgtrans: rgba(0, 0, 0, 0.2);
-       --bgtrans2: rgba(255, 255, 255, 0.01);
+       --bgtrans2: rgba(255, 255, 255, 0.1);
 
        /* Text */
        --txt: rgb(236, 241, 233);
@@ -100,9 +124,9 @@
        --primary: 255, 20, 20;
        --secondary: 255, 200, 100;
        --pri: rgb(var(--primary));
-       --pri2: rgba(var(--primary), 0.2);
+       --pri2: rgba(var(--primary), 0.1);
        --sec: rgb(var(--secondary));
-       --sec2: rgba(var(--secondary), 0.2);
+       --sec2: rgba(var(--secondary), 0.1);
 
        /* Some important stuff */
        --header-width: auto;
@@ -113,6 +137,9 @@
 }
 html {
     overflow: hidden;
+}
+.debugOff {
+    display: none !important;
 }
 </style>
 

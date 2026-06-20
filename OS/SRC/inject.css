@@ -1,1 +1,3 @@
-@import "CSS/main.css";
+@import "CSS/startup.css";
+@import "CSS/background.css";
+@import "CSS/login.css";
