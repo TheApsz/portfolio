@@ -1,28 +1,29 @@
 
-@font-face {
-    font-family: 'SpaceGrotesk';
-    src: url('FONT/SpaceGrotesk.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 :root {
        /* Backgrounds */
        --bg: rgb(15, 14, 14);
        --bg2: rgb(31, 30, 30);
        --bgtrans: rgba(0, 0, 0, 0.2);
-       --bgtrans2: rgba(255, 255, 255, 0.01);
+       --bgtrans2: rgba(255, 255, 255, 0.05);
+       --bgtrans3: rgba(255, 255, 255, 0.1);
 
        /* Text */
        --txt: rgb(255, 255, 255);
+       --txt2: rgb(150, 150, 150);
 
        /* Colors */
        --primary: 236, 39, 39;
-       --secondary: 253, 114, 114;
+       --secondary: 240, 180, 80;
        --pri: rgb(var(--primary));
        --pri2: rgba(var(--primary), 0.2);
        --sec: rgb(var(--secondary));
        --sec2: rgba(var(--secondary), 0.2);
+       --on:  rgb(70, 200, 75);
+       --warn:  rgb(200, 148, 70);
+       --off:  rgb(200, 70, 70);
+
+       /* Border */
+       --border: rgba(255,255,255,0.15);
 
        /* Some important stuff */
        --br: 10px;
@@ -57,23 +58,6 @@ body {
        overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, p, div {
-       color: var(--txt);
-       font-weight: 500;
-       letter-spacing: -0.8px;
-       text-rendering: geometricPrecision;
-       font-smooth: always;
-}
-h1 {
-       line-height: 0.8;
-}
-h2 {
-       font-weight: 300;
-       line-height: 1.5;
-       letter-spacing: 0;
-}
-
-
 /* Target WebKit browsers (Chrome, Safari, etc.) */
 *::-webkit-scrollbar {
        width: 1px; /* Adjust width as desired */
@@ -82,59 +66,4 @@ h2 {
 ::selection {
        color: white; /* Change the text color */
        background-color: var(--bgtrans); /* Change the background color */
-}
-
-
-@-moz-document url-prefix() {
-       .trans-low:before,
-       .trans-med:before,
-       .trans-high:before {
-              background: var(--bg2);
-              backdrop-filter: none !important;
-       }
-}
-.trans-low, .trans-med, .trans-high {
-       position: relative;
-}
-
-.trans-low:before, .trans-med:before, .trans-high:before {
-       content: '';
-       position: absolute;
-       width: 100%;
-       height: 100%;
-       top: 0;
-       left: 0;
-       border-radius: inherit;
-       z-index: -1;
-       justify-self: center;
-       align-self: center;
-       pointer-events: none;
-}
-.trans-low:before {
-       backdrop-filter: blur(8px);
-}
-.trans-med:before {
-       backdrop-filter: blur(20px);
-}
-.trans-high:before {
-       backdrop-filter: blur(40px);
-}
-
-@supports (backdrop-filter: url(#frost-low)) {
-       .trans-low:before { backdrop-filter: url(#frost-low); }
-}
-@supports (backdrop-filter: url(#frost-med)) {
-       .trans-med:before { backdrop-filter: url(#frost-med); }
-}
-@supports (backdrop-filter: url(#frost-high)) {
-       .trans-high:before { backdrop-filter: url(#frost-high); }
-}
-
-.button {
-       cursor: pointer;
-       transition: transform var(--S1);
-
-       &:active {
-              transform: scale(0.95);
-       }
 }
