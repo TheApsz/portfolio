@@ -1,0 +1,41 @@
+.button {
+       cursor: pointer;
+       transition: transform var(--S1), background 0.2s ease;;
+
+       &:active {
+              transform: scale(0.95);
+       }
+
+       &.primary {
+              background: var(--pri2);
+
+              &:hover {
+                     background: var(--pri);
+                     color: black;
+                     font-weight: 700;
+
+                     h1, h2 ,h3 {
+                            color: black;
+                            font-weight: 700;
+                     }
+              }
+       }
+       &.secondary {
+              background: var(--bgtrans2);
+
+              &:hover {
+                     background: var(--bgtrans3);
+              }
+       }
+       &.hidden {
+              background: none;
+       }
+       &.disabled {
+              background: var(--bgtrans);
+              cursor: not-allowed;
+
+              h3 {
+                     color: var(--txt2);
+              }
+       }
+}

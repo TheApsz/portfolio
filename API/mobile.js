@@ -1,10 +1,11 @@
 $(document).ready(function() {
   function updateClasses() {
     if ($(window).width() < $(window).height()) {
-      $('.desktop').removeClass('desktop').addClass('mobile');
+      $('.responsive').addClass('mobile');
       console.log('Mobile');
     } else {
-        console.log('Desktop');
+        $('.responsive').addClass('desktop');
+        console.log('Desktop')
     }
   }
   
