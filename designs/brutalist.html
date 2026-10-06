@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APSZ.DEV — Brutalist</title>
+<!-- portfolio API snippets (../API): design tokens, SpaceGrotesk, buttons, transitions, border, gaussian + JS helpers -->
+<link rel="stylesheet" href="../API/import.css">
+<script src="https://cdn.jsdelivr.net/npm/cash-dom/dist/cash.min.js"></script>
+<script type="module" src="../API/import.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* API compat: the API <link> above supplies vars/snippets; everything below is this design's own styling and wins */
+body{display:block !important;}
+*,*::before,*::after{border-radius:0 !important;}
+h1,h2,h3,h4,h5,p,div{color:inherit;}
+.btn,.card{transition:transform var(--S1),box-shadow .12s ease;}
+:root{--paper:#fffdf5;--ink:#111;--yellow:#ffde00;--red:#ff4d00;--blue:#2400ff;--green:#00a95c}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Space Mono',monospace;border:6px solid var(--ink)}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1120px,92vw);margin:0 auto}
+.marquee{background:var(--ink);color:var(--yellow);font-weight:700;white-space:nowrap;overflow:hidden;padding:8px 0;border-bottom:4px solid var(--ink)}
+.marquee div{display:inline-block;animation:m 14s linear infinite}
+@keyframes m{to{transform:translateX(-50%)}}
+nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0;border-bottom:4px solid var(--ink);flex-wrap:wrap}
+.logo{font-family:'Archivo Black';font-size:24px;background:var(--ink);color:#fff;padding:6px 12px;transform:rotate(-2deg)}
+.links{display:flex;gap:0;border:3px solid var(--ink)}
+.links a{padding:10px 16px;font-weight:700;border-right:3px solid var(--ink);text-transform:uppercase;font-size:13px}
+.links a:last-child{border-right:0}
+.links a:nth-child(1):hover{background:var(--yellow)}
+.links a:nth-child(2):hover{background:var(--red);color:#fff}
+.links a:nth-child(3):hover{background:var(--blue);color:#fff}
+.navCta{font-family:'Archivo Black';background:var(--red);color:#fff;border:3px solid var(--ink);padding:10px 18px;box-shadow:5px 5px 0 var(--ink)}
+.navCta:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.hero{margin:26px auto 0;border:4px solid var(--ink);box-shadow:10px 10px 0 var(--ink);background:#fff;display:grid;grid-template-columns:1.3fr .7fr}
+.heroMain{padding:38px 34px;border-right:4px solid var(--ink)}
+.kicker{display:inline-block;background:var(--yellow);border:3px solid var(--ink);padding:6px 12px;font-weight:700;margin-bottom:18px;box-shadow:4px 4px 0 var(--ink);transform:rotate(-1deg)}
+h1{font-family:'Archivo Black';font-size:clamp(40px,6.5vw,76px);line-height:.92;text-transform:uppercase}
+h1 .hl{background:var(--blue);color:#fff;padding:0 10px;display:inline-block;transform:rotate(1deg)}
+h1 .hl2{background:var(--red);color:#fff;padding:0 10px;display:inline-block;transform:rotate(-1deg)}
+.sub{margin:18px 0;font-size:16px;max-width:48ch;border-left:6px solid var(--ink);padding-left:14px}
+.btnRow{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+.btn{font-family:'Archivo Black';font-size:14px;padding:14px 20px;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);display:inline-block;text-transform:uppercase;transition:.12s}
+.btn:active{transform:translate(5px,5px);box-shadow:0 0 0 var(--ink)}
+.primary{background:var(--ink);color:#fff}
+.primary:hover{background:var(--yellow);color:var(--ink)}
+.secondary{background:#fff}
+.secondary:hover{background:var(--green);color:#fff}
+.ghost{background:var(--paper);box-shadow:none;border-style:dashed}
+.ghost:hover{background:#eee}
+.heroSide{background:var(--yellow);padding:28px;display:flex;flex-direction:column;gap:14px;justify-content:center}
+.sticker{border:3px solid var(--ink);padding:12px;background:#fff;box-shadow:5px 5px 0 var(--ink);font-weight:700}
+.sticker:nth-child(odd){transform:rotate(2deg)}
+.sticker:nth-child(even){transform:rotate(-2deg);background:var(--ink);color:#fff}
+.stats{display:flex;border:3px solid var(--ink);margin-top:18px;background:#fff}
+.stats div{flex:1;padding:12px;text-align:center;border-right:3px solid var(--ink)}
+.stats div:last-child{border:0}
+.stats b{font-family:'Archivo Black';font-size:24px;display:block}
+.cards{margin:26px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{border:4px solid var(--ink);background:#fff;padding:24px;box-shadow:8px 8px 0 var(--ink);transition:.12s}
+.card:nth-child(2){background:var(--ink);color:#fff;transform:rotate(.6deg)}
+.card:nth-child(2) .btn{background:var(--yellow);color:var(--ink)}
+.card:hover{transform:translate(-3px,-3px);box-shadow:11px 11px 0 var(--red)}
+.card h2{font-family:'Archivo Black';font-size:22px;margin:10px 0;text-transform:uppercase}
+.card p{font-size:14px;margin-bottom:12px}
+.price{font-family:'Archivo Black';font-size:28px;background:var(--yellow);display:inline-block;padding:2px 10px;border:3px solid var(--ink);margin:8px 0 14px}
+.lab{margin:24px auto 0;border:4px solid var(--ink);padding:18px;background:var(--blue);color:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;box-shadow:8px 8px 0 var(--ink)}
+footer{margin:26px auto 30px;border:4px solid var(--ink);padding:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;background:#fff;box-shadow:8px 8px 0 var(--ink);font-weight:700}
+footer a{text-decoration:underline}
+@media(max-width:860px){.hero{grid-template-columns:1fr}.heroMain{border-right:0;border-bottom:4px solid var(--ink)}.cards{grid-template-columns:1fr}.links{display:none}}
+</style>
+</head>
+<body>
+<div class="marquee"><div>★ AVAILABLE FOR FREELANCE ★ NO TEMPLATES ★ NO BULLSHIT ★ HANDMADE HTML ★ AVAILABLE FOR FREELANCE ★ NO TEMPLATES ★ NO BULLSHIT ★ HANDMADE HTML ★&nbsp;</div></div>
+<div class="wrap"><nav class="responsive">
+  <div class="logo">APSZ.DEV✷</div>
+  <div class="links"><a href="#s">Services</a><a href="#w">Work</a><a href="#c">Contact</a></div>
+  <a class="navCta" href="#c">HIRE ME →</a>
+</nav></div>
+<div class="wrap hero">
+  <div class="heroMain">
+    <span class="kicker">● FREELANCE FRONTEND — EST. 2021</span>
+    <h1>I BUILD <span class="hl">FAST</span> &amp; <span class="hl2">LOUD</span> WEBSITES.</h1>
+    <p class="sub">Landing pages, portfolios and browser experiments. Vanilla JS, zero bloat, maximum contrast. Placeholder hero text so you can compare layouts side by side.</p>
+    <div class="btnRow"><a class="btn primary" href="#w">View work ↓</a><a class="btn secondary" href="#c">Contact</a><a class="btn ghost" href="#">Github ↗</a></div>
+    <div class="stats"><div><b>4+</b>YRS JS</div><div><b>5+</b>YRS CSS</div><div><b>10+</b>SHIPPED</div></div>
+  </div>
+  <div class="heroSide">
+    <div class="sticker">📍 LITHUANIA / EEST</div>
+    <div class="sticker">⚡ SHIPS IN DAYS, NOT MONTHS</div>
+    <div class="sticker">🍞 FUELED BY BANANA BREAD</div>
+  </div>
+</div>
+<div class="wrap cards" id="s">
+  <div class="card border card-hover"><div>01 / LANDING</div><h2>Landing Page</h2><p>1–3 sections, mobile-first, contact form. Same placeholder card copy in every design.</p><div class="price">from 150€</div><br><a class="btn primary" href="#c">I want this →</a></div>
+  <div class="card border card-hover"><div>02 / PORTFOLIO</div><h2>Portfolio / Business</h2><p>Multi-section + project grid, Figma to code, animations that don't lag.</p><div class="price">from 250€</div><br><a class="btn primary" href="#c">I want this →</a></div>
+  <div class="card border card-hover"><div>03 / WEIRD</div><h2>Custom / Weird</h2><p>Dashboards, mini-apps, OS-in-browser energy. Price depends how cursed.</p><div class="price">from 400€</div><br><a class="btn secondary" href="#c">Pitch me →</a></div>
+</div>
+<div class="wrap lab"><b>/// BUTTON SET — SAME ON EVERY PAGE</b><div class="btnRow"><a class="btn primary" href="#">Primary</a><a class="btn secondary" href="#">Secondary</a><a class="btn ghost" href="#">Ghost</a><span style="font-weight:700;font-size:12px;align-self:center">+ API:</span><a class="button primary" href="#" style="padding:10px 18px"><h3 style="font-size:14px;margin:0">API 1°</h3></a><a class="button secondary" href="#" style="padding:10px 18px"><h3 style="font-size:14px;margin:0">API 2°</h3></a></div></div>
+<footer class="wrap"><span>© 2026 APSZ.DEV — PRINTED ON PIXELS</span><span><a href="#">DISCORD</a> · <a href="#">TELEGRAM</a> · <a href="#">GITHUB</a></span></footer>
+</body>
+</html>

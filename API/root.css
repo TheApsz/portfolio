@@ -2,8 +2,13 @@
 
 :root {
        /* Backgrounds */
+<<<<<<< Updated upstream
        --bg: rgba(11, 11, 13, 1);
        --bg2: rgb(16, 16, 18);
+=======
+       --bg: rgb(15, 14, 14);
+       --bg2: rgb(20, 20, 20);
+>>>>>>> Stashed changes
        --bgtrans: rgba(0, 0, 0, 0.2);
        --bgtrans2: rgba(255, 255, 255, 0.01);
 
@@ -49,6 +54,11 @@ body {
        gap: 30px;
        min-height: 100svh;
        overflow-x: hidden;
+}
+img {
+       width: 100%;
+       height: 100%;
+       object-fit: cover;
 }
 
 h1, h2, h3, h4, h5, p, div {
