@@ -1,0 +1,21 @@
+#background {
+    background: black;
+    position: fixed;
+    width: 100svw;
+    height: 100svh;
+    overflow: hidden;
+    pointer-events: none;
+    border-radius: 0 !important;
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transition: var(--S3);
+        scale: 1.05;
+
+        &.zoom {
+            scale: 1.2;
+        }
+    }
+}

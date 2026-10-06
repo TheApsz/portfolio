@@ -1,0 +1,15 @@
+#login {
+    background: var(--bgtrans);
+    position: fixed;
+    width: 100svw;
+    height: 100svh;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--F1);
+
+    &.active {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
