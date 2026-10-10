@@ -1,3 +1,4 @@
 
-// import "./JS/time.js";
+import "./JS/navbarDomain.js";
+import "./JS/heroMatrix.js";
 

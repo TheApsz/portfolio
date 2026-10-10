@@ -39,7 +39,7 @@ html {
        padding: 0;
        border-radius: var(--br);
        box-sizing: border-box;
-       font-family: 'SpaceGrotesk', sans-serif;
+       font-family: 'dm', sans-serif;
 }
 a {
        text-decoration: none;
