@@ -1,0 +1,68 @@
+#hero.desktop {
+    --px: clamp(10px, 1.6vw, 18px);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 80px;
+    background: none;
+    gap: 32px;
+    
+
+    .heroText {
+        background: transparent;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        gap: 20px;
+
+        .heroMatrix {
+            display: grid;
+            grid-template-columns: repeat(25, var(--px));
+            grid-auto-rows: var(--px);
+            gap: 2px;
+
+            .px {
+                width: var(--px);
+                height: var(--px);
+                border-radius: 5px;
+                transition: none;
+
+                &.off {
+                    background: var(--bgtrans);
+                    box-shadow: none;
+                }   
+
+                &.on {
+                    background: var(--pri);
+                }
+            }
+        }   
+
+        .heroSummery {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 4px;
+
+            h2 {
+                font-size: 16px;
+                color: var(--txt2);
+            }
+        }
+    }
+    .heroImage {
+        background: linear-gradient(to top, var(--pri2), transparent 50%);
+        width: 35%;
+        height: 500px;
+        overflow: hidden;
+
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+}

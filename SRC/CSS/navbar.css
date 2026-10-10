@@ -8,12 +8,13 @@
     align-items: center;
     justify-content: space-between;
     padding: 6px 12px;
+    z-index: 9999;
 
     .navbarSection {
-        background: black;
 
-        h2 {
+        h3 {
             font-size: 16px;
+            font-weight: 500;
         }
     }
     .navbarLinks {
@@ -74,6 +75,15 @@
                     font-weight: 700;
                 }
             }
+        }
+    }
+    .navbarDomain {
+        color: var(--pri);
+        font-size: 16px;
+        font-weight: 500;
+
+        span {
+            color: var(--pri2);
         }
     }
 }
