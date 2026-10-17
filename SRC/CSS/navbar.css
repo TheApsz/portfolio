@@ -1,60 +1,89 @@
-#navbar {
+#navbar.desktop {
     position: fixed;
-    top: 10px;
-    background: transparent;
-    width: 90%;
-    max-width: 1200px;
+    top: 0;
+    margin-top: 12px;
+    background: none;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    z-index: 100;
+    justify-content: space-between;
+    padding: 6px 12px;
+    z-index: 9999;
 
-    .navbarIndicator {
-        position: relative;
-        overflow: hidden;
+    .navbarSection {
+
+        h3 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+    }
+    .navbarLinks {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background: transparent;
-        
-        h2 {
-            font-size: 22px;
-            
-            &.changeout {
-                animation: changeOut 0.3s ease;
+        flex-direction: row;
+
+        .button {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background: transparent;
+            padding: 3px 12px;
+            overflow:  hidden;
+            transition: var(--F3);
+
+            &:before {
+                content: '';
+                position: absolute;
+                aspect-ratio: 1;
+                background: var(--pri);
+                height: 32px;
+                border-radius: 50% !important;
+                translate: -50% -50%;
+                top: 100%;
+                left: 50%;
+                z-index: -1;
+                opacity: 0.5;
+                scale: 0;
+                transition: scale 0.2s ease, opacity 0.3s ease;
             }
-            &.changein {
-                animation: changein 0.3s ease;
+
+            span {
+                font-size: 8px;
+                margin-right: 8px;
+                opacity: 0.5;
+                transition: var(--F2);
+            }
+            h2 {
+                font-size: 12px;
+                transition: var(--F2);
+            }
+
+            &:hover {
+                padding: 3px 20px;
+
+                &:before {
+                    opacity: 1;
+                    scale: 5;
+                    transition: scale 0.5s ease, opacity 0.5s ease;
+                }
+                span {
+                    color: black;
+                    opacity: 1;
+                }
+                h2 {
+                    color: black;
+                    font-weight: 700;
+                }
             }
         }
     }
-
-    h1 {
+    .navbarDomain {
         color: var(--pri);
-        font-size: 22px;
-    }
-}
+        font-size: 16px;
+        font-weight: 500;
 
-@keyframes changein {
-    from {
-        translate: 0% 100%;
-        opacity: 0;
-    }
-    to {
-        translate: 0% 0%;
-        opacity: 1;
-    }
-}
-@keyframes changeOut {
-    from {
-        translate: 0% 0%;
-        opacity: 1;
-    }
-    to {
-        translate: 0% -100%;
-        opacity: 0;
+        span {
+            color: var(--pri2);
+        }
     }
 }
