@@ -39,7 +39,7 @@ html {
        padding: 0;
        border-radius: var(--br);
        box-sizing: border-box;
-       font-family: 'SpaceGrotesk', sans-serif;
+       font-family: 'dm', sans-serif;
 }
 a {
        text-decoration: none;
@@ -66,4 +66,12 @@ body {
 ::selection {
        color: white; /* Change the text color */
        background-color: var(--bgtrans); /* Change the background color */
+}
+
+.material-symbols-rounded {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 700,
+  'GRAD' 0,
+  'opsz' 24
 }
