@@ -1,6 +1,5 @@
 
 // Imports JavaScript files
-import '/API/JS/forceCSS.js';
 import '/API/mobile.js';
 import '/API/smoothScroll.js';
 import '/API/JS/load.js';
