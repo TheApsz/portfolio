@@ -45,6 +45,29 @@ a {
        text-decoration: none;
        color: inherit;
 }
+img.pixel {
+       image-rendering: pixelated;
+       image-rendering: crisp-edges;
+}
+.img {
+       display: inline-block;
+       background-color: currentColor;
+       mask-position: center;
+       mask-repeat: no-repeat;
+       mask-size: contain;
+       -webkit-mask-position: center;
+       -webkit-mask-repeat: no-repeat;
+       -webkit-mask-size: contain;
+       overflow: hidden;
+       border-radius: 0 !important;
+
+       > img.pixel {
+              display: block;
+              opacity: 0;
+              width: 100%;
+              height: 100%;
+       }
+}
 
 body {
        color: var(--txt);

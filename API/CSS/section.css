@@ -3,6 +3,10 @@
        padding: 0px 0px;
        background: black;
        width: 1200px;
+
+       .title {
+              margin-bottom: 12px
+       }
 }
 .section-sec {
        position: relative;

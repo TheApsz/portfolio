@@ -27,9 +27,11 @@
             flex-direction: row;
             align-items: center;
             background: transparent;
-            padding: 3px 12px;
+            padding: 4px 8px;
             overflow:  hidden;
             transition: var(--F3);
+            gap: 6px;
+            flex: 1;
 
             &:before {
                 content: '';
@@ -47,28 +49,28 @@
                 transition: scale 0.2s ease, opacity 0.3s ease;
             }
 
-            span {
-                font-size: 8px;
-                margin-right: 8px;
-                opacity: 0.5;
+            .img {
+                aspect-ratio: 1;
+                height: 100%;
+                background: var(--txt2);
                 transition: var(--F2);
             }
+
             h2 {
                 font-size: 12px;
                 transition: var(--F2);
             }
 
             &:hover {
-                padding: 3px 20px;
+                padding: 4px 16px;
 
                 &:before {
                     opacity: 1;
                     scale: 5;
                     transition: scale 0.5s ease, opacity 0.5s ease;
                 }
-                span {
-                    color: black;
-                    opacity: 1;
+                .img {
+                    background: black;
                 }
                 h2 {
                     color: black;

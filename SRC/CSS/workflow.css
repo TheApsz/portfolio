@@ -1,0 +1,115 @@
+#workflow.desktop {
+    background: none;
+
+    .title {
+        color: var(--pri);
+        font-size: 32px;
+        margin-bottom: 6px;
+    }
+
+    .workflowDescription {
+        color: var(--txt2);
+        font-size: 14px;
+        letter-spacing: 0;
+        margin-bottom: 18px;
+    }
+
+    .workflowContent {
+        background: transparent;
+        width: 100%;
+    }
+
+    .workflowPanel {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        padding: 40px 40px;
+        border: 1px solid var(--border);
+
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+            background-size: 24px 24px;
+            background-position: -1px -1px;
+            mask-image: radial-gradient(130% 130% at 50% 45%, #000 50%, transparent 100%);
+        }
+
+        .workflowTrack {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 20px 14px;
+
+
+            .card {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                gap: 5px;
+                min-height: 96px;
+                padding: 16px 14px 14px;
+                background: var(--bg2);
+                border: 1px solid var(--border);
+                transition: var(--S1);
+
+                &:hover {
+                    border-color: var(--pri2);
+                    background: color-mix(in srgb, var(--pri) 5%, var(--bg2));
+            
+                    .cardIndex {
+                        color: var(--pri);
+                    }
+                }
+                &.branch {
+                    grid-column: 3 / span 2;
+                    grid-row: 2;
+                    min-height: 74px;
+                    border-style: dashed;
+                    border-color: var(--pri2);
+                    background: color-mix(in srgb, var(--pri) 4%, var(--bg2));
+
+                    .cardIndex {
+                        color: var(--pri);
+                    }
+                    &:hover {
+                        border-color: var(--pri);
+                        background: color-mix(in srgb, var(--pri) 8%, var(--bg2));
+
+                        .cardIndex {
+                            color: var(--pri);
+                        }
+                    }
+                }
+
+                h3 {
+                    font-size: 13px;
+                    font-weight: 400;
+                    line-height: 1;
+                    letter-spacing: 0.5px;
+                    color: rgb(190, 190, 190);
+                }
+                h2 {
+                    font-size: 15px;
+                    line-height: 1.1;
+                    letter-spacing: 0;
+                    color: var(--txt);
+                }
+                .cardIndex {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    font-size: 10px !important;
+                    font-weight: 400;
+                    letter-spacing: 1px;
+                    color: rgba(255, 255, 255, 0.5);
+                    transition: color var(--F2);
+                }
+            }
+        }
+    }
+}
